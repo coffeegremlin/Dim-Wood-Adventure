@@ -1,12 +1,40 @@
 /*----------------- Constants -----------------*/
 
+
+
 /*------------- Variables (state) -------------*/
+
+
 
 /*--------- Cached Element References ---------*/
 
+const dialog = document.querySelector('#dialog-box')
+// add background image display
+
+// add inventory dropdown here
+const upBtn = document.querySelector('#up')
+const rightBtn = document.querySelector('#right')
+const downBtn = document.querySelector('#down')
+const leftBtn = document.querySelector('#left')
+
+// add status image/gif box
+
 /*-------------- Event Listeners --------------*/
 
+upBtn.addEventListener('click', )
+rightBtn.addEventListener('click', )
+downBtn.addEventListener('click', )
+leftBtn.addEventListener('click', )
+
+// status.addEventListener('click')
+// statusImg.addEventListener('click', )
+// maybe add some status message? ^^^
+// or item animation
+
 /*----------------- Functions -----------------*/
+
+
+
 
 //Structure example vvvvv
 // function start(){
