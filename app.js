@@ -17,6 +17,11 @@ const rightBtn = document.querySelector('#right')
 const downBtn = document.querySelector('#down')
 const leftBtn = document.querySelector('#left')
 
+const choice1 = document.querySelector('#choice1')
+const choice2 = document.querySelector('#choice2')
+
+const startBtn = document.querySelector('#start')
+
 // add status image/gif box
 
 /*-------------- Event Listeners --------------*/
@@ -26,6 +31,10 @@ rightBtn.addEventListener('click', )
 downBtn.addEventListener('click', )
 leftBtn.addEventListener('click', )
 
+choice1.addEventListener('click', )
+choice2.addEventListener('click', )
+
+startBtn.addEventListener('click', )
 // status.addEventListener('click')
 // statusImg.addEventListener('click', )
 // maybe add some status message? ^^^
@@ -33,7 +42,9 @@ leftBtn.addEventListener('click', )
 
 /*----------------- Functions -----------------*/
 
-
+function startGame(){
+  startBtn.onclick()
+}
 
 
 //Structure example vvvvv
