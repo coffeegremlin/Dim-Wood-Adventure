@@ -8,30 +8,21 @@ const inventory = []
 
 /*--------- Cached Element References ---------*/
 
+const winLoseMessage = document.querySelector('#win-lose-message')
 const backGround = document.querySelector('#background')
+const enemyBox = document.querySelector('#enemy')
 const dialog = document.querySelector('#dialog-box')
-// add background image display
 
-// add inventory dropdown here
-// const upBtn = document.querySelector('#up')
-// const rightBtn = document.querySelector('#right')
-// const downBtn = document.querySelector('#down')
-// const leftBtn = document.querySelector('#left')
-
+const inventory = document.querySelector('#inventory')
 const choice1Btn = document.querySelector('#choice1')
 const choice2Btn = document.querySelector('#choice2')
 
 const startBtn = document.querySelector('#start')
 
-const playerStatus = document.querySelector('#current-status')
-// add status image/gif box
+const playerStatusText = document.querySelector('#current-status')
+const playerStatusImg = document.querySelector('#player-status')
 
 /*-------------- Event Listeners --------------*/
-
-// upBtn.addEventListener('click', )
-// rightBtn.addEventListener('click', )
-// downBtn.addEventListener('click', )
-// leftBtn.addEventListener('click', )
 
 startBtn.addEventListener('click', evt => {
 
@@ -44,12 +35,20 @@ choice2Btn.addEventListener('click', evt => {
 
 })
 
-// status.addEventListener('click')
-// statusImg.addEventListener('click', )
-// maybe add some status message? ^^^
-// or item animation
-
 /*----------------- Functions -----------------*/
+
+// Steps to flesh out functions vvv
+// On start, load the game for the first branch, start playing music (make sure the selected audio will loop).
+// onclick change the dialog box to the current branch of the game.
+// Change audio depending on which branch the player is at.
+// Change the text of choice1Btn and choice2Btn to the current options.
+// onClick for choice buttons load the related function below it.
+// Either add or change background, add or change enemy(if relevant).
+// choice1Btn.onClick(){load selected function}
+// Depending on branch, animate/run gif of player status(attack, roll, death, etc.)
+// Also animate/run gif of enemy status(on top of background box on the right.)
+// 
+
 
 function startGame(){
   startBtn.onclick
@@ -164,17 +163,3 @@ function youWin(){
 function gameOver(){
 
 }
-
-
-//Structure example vvvvv
-// function start(){
-//   dialogBox.innerText = `It's a dark and stormy night. There's two paths to get into the castle before you.`
-//   button1.innerText = `Climb the gate (risky but fast)`
-//   button2.innerText = `Walk to the back (safe but slow)`
-// }
-
-// function button2Step1(){
-//   button2.eventListener('click'){
-//     dialogBox.innerText = `You lost 10 minutes but got to the back door safely. It's locked.`
-//   }
-// }
