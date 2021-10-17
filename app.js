@@ -8,6 +8,7 @@ const inventory = []
 
 /*--------- Cached Element References ---------*/
 
+const backGround = document.querySelector('#background')
 const dialog = document.querySelector('#dialog-box')
 // add background image display
 
@@ -22,6 +23,7 @@ const choice2Btn = document.querySelector('#choice2')
 
 const startBtn = document.querySelector('#start')
 
+const playerStatus = document.querySelector('#current-status')
 // add status image/gif box
 
 /*-------------- Event Listeners --------------*/
@@ -103,7 +105,7 @@ function attackGhost(){
 
 // Look for item to remove the ghost (leads to youWin)
 function lookForItem(){
-  
+
 }
 
 // Approach the cloaked figure (branch1, branch2, and branchMergeTryGate if the player has key from branch 1 lead to this)
