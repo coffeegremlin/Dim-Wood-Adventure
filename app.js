@@ -4,9 +4,10 @@
 
 /*------------- Variables (state) -------------*/
 
-const inventoryBag = []
+let itemSilverKey = (null)
 
-const totalChoices = []
+// Log how many clicks/choice player made and use this to display at end?
+let totalChoices = []
 
 /*--------- Cached Element References ---------*/
 
@@ -70,6 +71,7 @@ function tryAgain(){
   choice1Btn.setAttribute('hidden', true)
   choice2Btn.setAttribute('hidden', true)
   dialog.innerText = '...'
+  itemSilverKey = (null)
   console.log('Try again function ran')
 }
 
@@ -123,13 +125,13 @@ function branch2PressOn(){
 // Try the gate (branch1 merges with branch 2 here)
 // If player does not have key from branch1, gate === locked/false return to branch2Graveyard
 function branchMergeTryGate(){
-  if (key === true){
+  if (itemSilverKey === true){
     dialog.innerText = `You pull the silver key from you pocket and see it glow as you hold it to the gate’s lock. The key and the gate seem to shimmer into nothingness. Choice 1: Enter and explore the church. Choice 2: Approach the cloaked figure?`
     removeChoices()
     presentBranch1 = enterChurch
     presentBranch2 = branchMergeApproachFigure
     addChoices()
-  } else if (key === false){
+  } else if (itemSilverKey === false){
     dialog.innerText = `The gate is locked and will not budge. You don't have a key. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
     removeChoices()
     presentBranch1 = branchMergeTryGate
@@ -222,10 +224,7 @@ function branch1IgnoreSkull(){
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key! As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
-  // function addElement(){
-  //   const silverKey = document.createElement('div');
-  //   const newItemText = document.createTextNode
-  // }
+  itemSilverKey = (true)
   removeChoices()
   presentBranch1 = branchMergeTryGate
   presentBranch2 = branchMergeApproachFigure
