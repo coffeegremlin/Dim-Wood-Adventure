@@ -26,9 +26,8 @@ const playerStatusImg = document.querySelector('#player-status')
 /*-------------- Event Listeners --------------*/
 
 startBtn.addEventListener('click', startGame)
-
-// choice1Btn.addEventListener('click')
-// choice2Btn.addEventListener('click')
+choice1Btn.setAttribute('hidden', true)
+choice2Btn.setAttribute('hidden', true)
 
 /*----------------- Functions -----------------*/
 
@@ -45,17 +44,19 @@ startBtn.addEventListener('click', startGame)
 
 //new button control functionality vvv
 // removeChoices()
-// let presentBranch1 = 
-// let presentBranch2 = 
+// presentBranch1 = 
+// presentBranch2 = 
 // addChoices()
-// Button control/wipe function, and then add new function to button vvv
 
+// Button control/wipe function, and then add new function to button vvv
 let presentBranch1 = (null)
 let presentBranch2 = (null)
 
 function removeChoices(){
   choice1Btn.removeEventListener('click', presentBranch1)
   choice2Btn.removeEventListener('click', presentBranch2)
+  presentBranch1 = (null)
+  presentBranch2 = (null)
 }
 
 function addChoices(){
@@ -63,11 +64,15 @@ function addChoices(){
   choice2Btn.addEventListener('click', presentBranch2)
 }
 
+
+
 function startGame(){
   startBtn.removeEventListener('click', startGame)
   startBtn.setAttribute('hidden', true)
+  choice1Btn.removeAttribute('hidden', true)
+  choice2Btn.removeAttribute('hidden', true)
   branchStart()
-  console.log('the game started')
+  console.log('startGame ran')
 }
 
 
@@ -79,17 +84,17 @@ function branchStart(){
   presentBranch1 = branch2Dark
   presentBranch2 = branch1Skull
   addChoices()
-  console.log('branch1 ran')
+  console.log('branchStart ran')
 }
 
 // Dark path choice
 function branch2Dark(){
   dialog.innerText = `Deciding the laughter can’t amount to anything good, you walk down the dark path. It seems impossible but the forest’s darkness settles around you heavier with every step. Choice 1: You push forward hoping for the darkness to let up. Choice 2: Turn back around deciding the other path was a better choice.`
   removeChoices()
-  // presentBranch1 = branch2PressOn()
-  // presentBranch2 = branch2WalkBack()
-  // addChoices()
-  console.log('branch2 dark ran')
+  presentBranch1 = 
+  presentBranch2 = 
+  addChoices()
+  console.log('branch2Dark ran')
 }
 
 // // Player decides to walk back (leads to youAreDead)
@@ -189,8 +194,8 @@ function branch2Dark(){
 function branch1Skull(){
   dialog.innerText = `As you walk down the path, deciding to investigate what the light is, you see it turns out to be a flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the skull, hoping you might catch it by surprise.`
   removeChoices()
-  let presentBranch1 = branch1IgnoreSkull()
-  let presentBranch2 = branch1AttackSkull()
+  presentBranch1 = 
+  presentBranch2 = 
   addChoices()
 }
 
