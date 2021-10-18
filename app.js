@@ -64,7 +64,14 @@ function addChoices(){
   choice2Btn.addEventListener('click', presentBranch2)
 }
 
-
+function tryAgain(){
+  startBtn.removeAttribute('hidden', true)
+  startBtn.addEventListener('click', startGame)
+  choice1Btn.setAttribute('hidden', true)
+  choice2Btn.setAttribute('hidden', true)
+  dialog.innerText = '...'
+  console.log('Try again function ran')
+}
 
 function startGame(){
   startBtn.removeEventListener('click', startGame)
@@ -98,9 +105,10 @@ function branch2Dark(){
 }
 
 // Player decides to walk back (leads to youAreDead)
+// Need to add a set timeout for this dialog to display before returning to youAreDead
 function branch2Walkback(){
 dialog.innerText = `You decide to walk back, you can’t go further if you can’t see. As you turn around, you run headfirst into a wall of razor sharp thorns that seemingly appeared out of nowhere. You are caught on the wall, and slowly lose consciousness. You are dead.`
-return youAreDead()
+youAreDead()
 }
 
 // Player decides to press on through the dark
@@ -140,15 +148,17 @@ function enterChurch(){
 }
 
 // Attack the ghost (leads to youAreDead)
+// Need to add a set timeout for this dialog to display before returning to youAreDead
 function attackGhost(){
   dialog.innerText = `You swing your sword at the ghost, and it passes right through the form of the specter. It finds your advance very rude, and returns the favor in kind. You feel it get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
-  return youAreDead()
+  youAreDead()
 }
 
 // Look for item to remove the ghost (leads to youWin)
+// Need to add a set timeout for this dialog to display before returning to youWin
 function lookForItem(){
   dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
-  return youWin()
+  youWin()
 }
 
 // Approach the cloaked figure (branch1, branch2, and branchMergeTryGate if the player has key from branch 1 lead to this)
@@ -161,9 +171,10 @@ function branchMergeApproachFigure(){
 }
 
 // Charge the wizard (leads to youAreDead)
+// Need to add a set timeout for this dialog to display before returning to youAreDead
 function chargeWizard(){
   dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
-  return youAreDead()
+  youAreDead()
 }
 
 // Find cover behind gravestone
@@ -176,15 +187,17 @@ function findCover(){
 }
 
 // Keep hiding (leads to youAreDead)
+// Need to add a set timeout for this dialog to display before returning to youAreDead
 function keepHiding(){
   dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
-  return youAreDead()
+  youAreDead()
 }
 
 // Run for the church (leads to youWin)
+// Need to add a set timeout for this dialog to display before returning to youWin
 function runToChurch(){
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
-  return youWin()
+  youWin()
 }
 
 
@@ -200,9 +213,10 @@ function branch1Skull(){
 }
 
 // Ignore the skull and sneak away (leads to youAreDead)
+// Need to add a set timeout for this dialog to display before returning to youAreDead
 function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
-  return youAreDead()
+  youAreDead()
 }
 
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
@@ -220,14 +234,25 @@ function branch1AttackSkull(){
 // You are dead screen function (leads to gameover or branchStart)
 function youAreDead(){
   dialog.innerText = `YOU ARE DEAD. Choice 1: TRY AGAIN? Choice 2: NO.`
+  removeChoices()
+  presentBranch1 = tryAgain
+  presentBranch2 = gameOver
+  addChoices()
+  console.log('youaredead ran')
 }
 
 // You win screen for player (leads to gameover or branchStart)
 function youWin(){
   dialog.innerText = `YOU WIN! Choice 1: TRY AGAIN? Choice 2: NO.`
+  removeChoices()
+  presentBranch1 = tryAgain
+  presentBranch2 = gameOver
+  addChoices()
+  console.log('youWin ran')
 }
 
 // Game over function for end screen
+// Need to add remove attributes and hidden for every element except background box, and dialog
 function gameOver(){
   dialog.innerText = `GAME OVER. THANK YOU FOR PLAYING.`
 }
