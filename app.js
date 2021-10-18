@@ -20,7 +20,6 @@ const choice1Btn = document.querySelector('#choice1')
 const choice2Btn = document.querySelector('#choice2')
 
 const startBtn = document.querySelector('#start')
-console.log(startBtn)
 const playerStatusText = document.querySelector('#current-status')
 const playerStatusImg = document.querySelector('#player-status')
 
@@ -28,58 +27,70 @@ const playerStatusImg = document.querySelector('#player-status')
 
 startBtn.addEventListener('click', startGame)
 
-choice1Btn.addEventListener('click', btnPress)
-choice2Btn.addEventListener('click', btnPress)
+// choice1Btn.addEventListener('click')
+// choice2Btn.addEventListener('click')
 
 /*----------------- Functions -----------------*/
 
 // Steps to flesh out functions vvv
 // On start, load the game for the first branch, start playing music (make sure the selected audio will loop).
-// onclick change the dialog box to the current branch of the game.
-// Change audio depending on which branch the player is at.
-// Change the text of choice1Btn and choice2Btn to the current options.
-// onClick for choice buttons load the related function below it.
+// the dialog box will be changed with every fuction of current branch of the game.
+// Change audio depending on startGame, youAreDead, youWin, gameOver.
+  // for every story branch function use the removeChoice function ath the bottom, and then update the buttons to lead to the next related branch/story function.
+    // choice1Btn.onClick(){load selected function}
 // Either add or change background, add or change enemy(if relevant).
-// choice1Btn.onClick(){load selected function}
-// Depending on branch, animate/run gif of player status(attack, roll, death, etc.)
-// Also animate/run gif of enemy status(on top of background box on the right.)
+  // Depending on branch, animate/run gif of player status(attack, roll, death, etc.)
+    // Also animate/run gif of enemy status(on top of background box on the right.)
+//At the end, add amount of button clicks or a value of how many choices the player made by using the const totalChoices.
 
-function btnPress(){
-  choice1Btn.value = 1
-  choice2Btn.value = 2
-  console.log('working')
+//new button control functionality vvv
+// removeChoices()
+// let presentBranch1 = 
+// let presentBranch2 = 
+// addChoices()
+// Button control/wipe function, and then add new function to button vvv
+
+let presentBranch1 = (null)
+let presentBranch2 = (null)
+
+function removeChoices(){
+  choice1Btn.removeEventListener('click', presentBranch1)
+  choice2Btn.removeEventListener('click', presentBranch2)
+}
+
+function addChoices(){
+  choice1Btn.addEventListener('click', presentBranch1)
+  choice2Btn.addEventListener('click', presentBranch2)
 }
 
 function startGame(){
-  startBtn.innerText = ''
+  startBtn.removeEventListener('click', startGame)
+  startBtn.setAttribute('hidden', true)
   branchStart()
-  startBtn.
-  console.log('hello world')
+  console.log('the game started')
 }
+
 
 // Story branch functions for game vvv
 
 // first choice for player
 function branchStart(){
   dialog.innerText = `You’ve ventured into the forest of Dim Wood in search of reaching hidden treasure. As you stand before the trees, you see two paths lie in front of you. Choice 1: A dark opening in the trees that has no sound. Choice 2: A faint light dances down a dark path with soft laughter.`
-  if (btnPress === 1){
-    console.log('button1 has been pressed')
-    branch2Dark()
-  } else if (btnPress === 2){
-    console.log('button2 has been pressed')
-    branch1Skull()
-  }
+  presentBranch1 = branch2Dark
+  presentBranch2 = branch1Skull
+  addChoices()
+  console.log('branch1 ran')
 }
 
-// // Dark path choice
-// function branch2Dark(){
-//   dialog.innerText = `Deciding the laughter can’t amount to anything good, you walk down the dark path. It seems impossible but the forest’s darkness settles around you heavier with every step. Choice 1: You push forward hoping for the darkness to let up. Choice 2: Turn back around deciding the other path was a better choice.`
-//   if (btnPress = 1){
-//     return 
-//   } else if (btnPress = 2){
-//     return
-//   }
-// }
+// Dark path choice
+function branch2Dark(){
+  dialog.innerText = `Deciding the laughter can’t amount to anything good, you walk down the dark path. It seems impossible but the forest’s darkness settles around you heavier with every step. Choice 1: You push forward hoping for the darkness to let up. Choice 2: Turn back around deciding the other path was a better choice.`
+  removeChoices()
+  // presentBranch1 = branch2PressOn()
+  // presentBranch2 = branch2WalkBack()
+  // addChoices()
+  console.log('branch2 dark ran')
+}
 
 // // Player decides to walk back (leads to youAreDead)
 // function branch2Walkback(){
@@ -172,15 +183,16 @@ function branchStart(){
 // }
 
 
-// // Investigate the light/laughter branch
-// function branch1Skull(){
-//   dialog.innerText = `As you walk down the path, deciding to investigate what the light is, you see it turns out to be a flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the skull, hoping you might catch it by surprise.`
-//   if (btnPress = 1){
-//     return 
-//   } else if (btnPress = 2){
-//     return
-//   }
-// }
+// BRANCH 1 STARTS HERE
+
+// Investigate the light/laughter branch
+function branch1Skull(){
+  dialog.innerText = `As you walk down the path, deciding to investigate what the light is, you see it turns out to be a flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the skull, hoping you might catch it by surprise.`
+  removeChoices()
+  let presentBranch1 = branch1IgnoreSkull()
+  let presentBranch2 = branch1AttackSkull()
+  addChoices()
+}
 
 // // Ignore the skull and sneak away (leads to youAreDead)
 // function branch1IgnoreSkull(){
@@ -198,18 +210,20 @@ function branchStart(){
 //   }
 // }
 
-// // END SCREEN FUNCTIONS
-// // You are dead screen function (leads to gameover or branchStart)
-// function youAreDead(){
-//   dialog.innerText = `YOU ARE DEAD. Choice 1: TRY AGAIN? Choice 2: NO.`
-// }
 
-// // You win screen for player (leads to gameover or branchStart)
-// function youWin(){
-//   dialog.innerText = `YOU WIN! Choice 1: TRY AGAIN? Choice 2: NO.`
-// }
+// END SCREEN FUNCTIONS
 
-// // Game over function for end screen
-// function gameOver(){
-//   dialog.innerText = `GAME OVER. THANK YOU FOR PLAYING.`
-// }
+// You are dead screen function (leads to gameover or branchStart)
+function youAreDead(){
+  dialog.innerText = `YOU ARE DEAD. Choice 1: TRY AGAIN? Choice 2: NO.`
+}
+
+// You win screen for player (leads to gameover or branchStart)
+function youWin(){
+  dialog.innerText = `YOU WIN! Choice 1: TRY AGAIN? Choice 2: NO.`
+}
+
+// Game over function for end screen
+function gameOver(){
+  dialog.innerText = `GAME OVER. THANK YOU FOR PLAYING.`
+}
