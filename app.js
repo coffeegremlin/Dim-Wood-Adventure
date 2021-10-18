@@ -222,6 +222,10 @@ function branch1IgnoreSkull(){
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key! As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  // function addElement(){
+  //   const silverKey = document.createElement('div');
+  //   const newItemText = document.createTextNode
+  // }
   removeChoices()
   presentBranch1 = branchMergeTryGate
   presentBranch2 = branchMergeApproachFigure
