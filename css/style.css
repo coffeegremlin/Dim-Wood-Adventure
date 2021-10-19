@@ -16,30 +16,7 @@ body{
   background-color: white;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr auto;
-  grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr auto;
-  grid-auto-columns: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-}
 
-#game-board { grid-area: 2 / 2 / 10 / 11; }
-
-#dialog-box { grid-area: 8 / 3 / 10 / 10; }
-
-#start { grid-area: 2 / 3 / 3 / 10; }
-
-#background { grid-area: 3 / 3 / 7 / 10; }
-
-#choice1 { grid-area: 7 / 3 / 8 / 5; }
-
-#choice2 { grid-area: 7 / 8 / 8 / 10; }
-
-#enemy { grid-area: 5 / 8 / 6 / 9; }
-
-#player-status { grid-area: 5 / 4 / 6 / 5; }
 
 /* #display{
   width: 720px;
