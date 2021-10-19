@@ -1,13 +1,20 @@
 /*----------------- Constants -----------------*/
-let heroDeathFrames = ['../images/hero-death/herodeath1.png', '../images/hero-death/herodeath2.png', '../images/hero-death/herodeath3.png', '../images/hero-death/herodeath4.png', '../images/hero-death/herodeath5.png', '../images/hero-death/herodeath6.png', '../images/hero-death/herodeath7.png', '../images/hero-death/herodeath8.png', '../images/hero-death/herodeath9.png', '../images/hero-death/herodeath10final.png']
+
+let demonAttackFrames = ['../images/demon-attack/da1.png', '../images/demon-attack/da2.png', '../images/demon-attack/da3.png', '../images/demon-attack/da4.png', '../images/demon-attack/da5.png', '../images/demon-attack/da6.png', '../images/demon-attack/da7.png', '../images/demon-attack/da8.png', '../images/demon-attack/da9.png', '../images/demon-attack/da10.png', '../images/demon-attack/da11.png']
+
+let skullAttackFrames = ['../images/skull-attack/skull1.png', '../images/skull-attack/skull2.png', '../images/skull-attack/fire1.png', '../images/skull-attack/fire2.png', '../images/skull-attack/fire3.png', '../images/skull-attack/fire4.png', '../images/skull-attack/fire5.png']
 
 let wizardDeathFrames = ['../images/wizard-death/death0.png', '../images/wizard-death/death1.png', '../images/wizard-death/death2.png', '../images/wizard-death/death3.png', '../images/wizard-death/death4.png', '../images/wizard-death/death5.png', '../images/wizard-death/death6.png', ]
 
 let wizardAttackFrames = ['../images/wizard-attack/Attack1.png', '../images/wizard-attack/Attack2.png', '../images/wizard-attack/Attack3.png', '../images/wizard-attack/Attack4.png', '../images/wizard-attack/Attack5.png', '../images/wizard-attack/Attack6.png', '../images/wizard-attack/Attack7.png', '../images/wizard-attack/Attack8.png']
 
+let heroDeathFrames = ['../images/hero-death/herodeath1.png', '../images/hero-death/herodeath2.png', '../images/hero-death/herodeath3.png', '../images/hero-death/herodeath4.png', '../images/hero-death/herodeath5.png', '../images/hero-death/herodeath6.png', '../images/hero-death/herodeath7.png', '../images/hero-death/herodeath8.png', '../images/hero-death/herodeath9.png', '../images/hero-death/herodeath10final.png']
+
 let heroAttackFrames = ['../images/hero-attack/hkattack1.png', '../images/hero-attack/hkattack2.png', '../images/hero-attack/hkattack3.png', '../images/hero-attack/hkattack4.png', '../images/hero-attack/hkattack5.png', '../images/hero-attack/hkattack6.png', '../images/hero-attack/hkattack7.png', '../images/hero-attack/hkattack8.png']
 
-let heroRollFrames = ['../images/', ]
+let heroRollFrames = ['../images/hero-roll/hkr1.png', '../images/hero-roll/hkr2.png', '../images/hero-roll/hkr3.png', '../images/hero-roll/hkr4.png', '../images/hero-roll/hkr5.png', '../images/hero-roll/hkr6.png', '../images/hero-roll/hkr7.png', '../images/hero-roll/hkr8.png']
+
+heroRunFrames ['../image/hero-run/hkrun1.png', '../image/hero-run/hkrun2.png', '../image/hero-run/hkrun3.png', '../image/hero-run/hkrun4.png', '../image/hero-run/hkrun5.png', '../image/hero-run/hkrun6.png', '../image/hero-run/hkrun7.png', '../image/hero-run/hkrun8.png', '../image/hero-run/hkrun9.png', '../image/hero-run/hkrun10.png', ]
 
 /*------------- Variables (state) -------------*/
 
@@ -50,15 +57,51 @@ choice2Btn.setAttribute('hidden', true)
     // Also animate/run gif of enemy status(on top of background box on the right.)
 //At the end, add amount of button clicks or a value of how many choices the player made by using the const totalChoices.
 
-//new button control functionality vvv
-// removeChoices()
-// presentBranch1 = 
-// presentBranch2 = 
-// addChoices()
 
 // Animations by set timeout vvv
 
-
+function attackIterateFrameDemon() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    playerStatusImg.src = demonAttackFrames[frame]
+    frame++
+    if (frame === 11){
+      clearInterval(frameIterator)
+      enemyBox.src = '../images/demon-idle.gif'
+    }
+  }, 250);
+}
+function attackIterateFrameSkull() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    enemyBox.src = skullAttackFrames[frame]
+    frame++
+    if (frame === 7){
+      clearInterval(frameIterator)
+    }
+  }, 250);
+}
+function deathIterateFrameWizard() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    enemyBox.src = wizardDeathFrames[frame]
+    frame++
+    if (frame === 7){
+      clearInterval(frameIterator)
+    }
+  }, 250);
+}
+function attackIterateFrameWizard() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    enemyBox.src = wizardAttackFrames[frame]
+    frame++
+    if (frame === 8){
+      clearInterval(frameIterator)
+      enemyBox.src = '../images/wizard-idle.gif'
+    }
+  }, 300);
+}
 function deathIterateFrameHero() {
   let frame = 0
   let frameIterator = setInterval(function() {
@@ -70,47 +113,43 @@ function deathIterateFrameHero() {
     }
   }, 250);
 }
-
-function deathIterateFrameWizard() {
-  let frame = 0
-  let frameIterator = setInterval(function() {
-    enemyBox.src = wizardDeathFrames[frame]
-    frame++
-    if (frame === 7){
-      clearInterval(frameIterator)
-      // if the final death is not displayed, set src here to final frame
-    }
-  }, 250);
-}
-
-function attackIterateFrameWizard() {
-  let frame = 0
-  let frameIterator = setInterval(function() {
-    enemyBox.src = wizardAttackFrames[frame]
-    frame++
-    if (frame === 7){
-      clearInterval(frameIterator)
-      // add wizard idle
-    }
-  }, 300);
-}
-
 function attackIterateFrameHero() {
   let frame = 0
   let frameIterator = setInterval(function() {
     playerStatusImg.src = heroAttackFrames[frame]
     frame++
-    if (frame === 10){
+    if (frame === 8){
       clearInterval(frameIterator)
       playerStatusImg.src = '../images/hero-idle.gif'
     }
   }, 250);
 }
+function rollIterateFrameHero() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    playerStatusImg.src = heroRollFrames[frame]
+    frame++
+    if (frame === 9){
+      clearInterval(frameIterator)
+    }
+  }, 250);
+}
+function runIterateFrameHero() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    playerStatusImg.src = heroRunFrames[frame]
+    frame++
+    if (frame === 10){
+      //maybe set it to go twice? ^^^
+      clearInterval(frameIterator)
+      playerStatusImg.src = '../images/hero-idle.gif'
+    }
+  }, 250);
+}
+
 // TO DO VVVVV
 
-//add hero roll frames
 // add ghost appear frames
-// add ghost attack frames
 // add ghost disappear frames
 //add skull death frames
 
@@ -187,7 +226,8 @@ function branchStart(){
 
 // Dark path choice
 function branch2Dark(){
-  dialog.innerText = `Deciding the laughter can’t amount to anything good, you walk down the dark path. It seems impossible but the forest’s darkness settles around you heavier with every step. Choice 1: You push forward hoping for the darkness to let up. Choice 2: Turn back around deciding the other path was a better choice.`
+  dialog.innerText = `Deciding the laughter can’t amount to anything good, you head down the dark path. It seems impossible but the forest’s darkness settles around you heavier with every step. Choice 1: You push forward hoping for the darkness to let up. Choice 2: Turn back around deciding the other path was a better choice.`
+  runIterateFrameHero()
   removeChoices()
   presentBranch1 = branch2PressOn
   presentBranch2 = branch2Walkback
@@ -207,7 +247,8 @@ function branch2Walkback(){
 
 // Player decides to press on through the dark
 function branch2PressOn(){
-  dialog.innerText = `You decide to press on further, hoping your eyes might adjust. The forest can only get so dark, it must eventually get lighter. It turns out that was a wise decision. Your optimism pays off as you press forward, and see the a path filled with lanterns leading you to a graveyard. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.)`
+  dialog.innerText = `You decide to press on further, hoping your eyes might adjust. The forest can only get so dark, it must eventually get lighter. It turns out that was a wise decision. Your optimism pays off as you press forward, and see the a path filled with lanterns leading you to a graveyard. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  runIterateFrameHero()
   removeChoices()
   presentBranch1 = branchMergeTryGate
   presentBranch2 = branchMergeApproachFigure
@@ -235,7 +276,9 @@ function branchMergeTryGate(){
 // Choose church
 function enterChurch(){
   dialog.innerText = `You decide whatever the cloaked figure is doing, if it’s in a graveyard it can’t be good. You walk to the church doors and heave them open. You see a ghost hovering in front of a gilded chest. Choice 1: Attack the ghost to get to the gilded chest. Choice 2: Silently look around for something to get rid of the ghost, and hope it doesn’t hear or see you moving about.`
+  runIterateFrameHero()
   enemyBox.removeAttribute('hidden', true)
+  
   // add ghost src
   removeChoices()
   presentBranch1 = attackGhost
@@ -266,7 +309,7 @@ function lookForItem(){
 function branchMergeApproachFigure(){
   dialog.innerText = `You decide to approach the cloaked figure, and as you draw near, you see it’s a dark wizard with yellowed skin drawn taught against his sallow bones. The wizard begin to gather oily black light atop his staff. Choice 1: Charge the wizard, hoping to reach him before he finishes casting his spell. Choice 2: Find a grave stone to take cover behind.`
   enemyBox.removeAttribute('hidden', true)
-  // add wizard src
+  enemyBox.src = '../images/wizard-idle.gif'
   removeChoices()
   presentBranch1 = chargeWizard
   presentBranch2 = findCover
@@ -278,16 +321,19 @@ function branchMergeApproachFigure(){
 function chargeWizard(){
   dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
   hideButtons()
-  // add hero run
-  attackIterateFrameHero()
+  runIterateFrameHero()
+  attackIterateFrameWizard()
   deathIterateFrameHero()
-  setTimeout(youAreDead, 10000);
+  setTimeout(youAreDead, 15000);
 }
 
 // Find cover behind gravestone
 function findCover(){
   dialog.innerText = `You take cover behind the closet gravestone as the wizard finishes his spell and aims it at you. The black oily flame bursts against the gravestone and you see it turn to snow. A ghost comes screaming out of the church above, throwing the iron gate wide open as its wail fills the sky. The wizard has angered the specter by attacking its final resting place. The ghost turns the wizard to a solid block of ice as you watch hidden behind the grave. Choice 1: Run for the church. Choice 2: You continue to keep hiding, and wait for the ghost to leave.`
-  //add ghost src and set timeout for wizard death
+  //add ghost enter/idle
+  rollIterateFrameHero()
+  // add gravestone here in front of hero
+  //ghost attack goes here
   deathIterateFrameWizard()
   removeChoices()
   presentBranch1 = runToChurch
@@ -300,7 +346,7 @@ function findCover(){
 function keepHiding(){
   dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
   hideButtons()
-  // add ghost attack
+  attackIterateFrameDemon()
   deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
@@ -310,7 +356,7 @@ function keepHiding(){
 function runToChurch(){
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
   hideButtons()
-  // add run
+  runIterateFrameHero()
   enemyBox.src = ''
   setTimeout(youWin, 15000);
 }
@@ -334,7 +380,8 @@ function branch1Skull(){
 function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
   hideButtons()
-  // add skull attack
+  rollIterateFrameHero()
+  attackIterateFrameSkull()
   deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
@@ -342,6 +389,7 @@ function branch1IgnoreSkull(){
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
+  runIterateFrameHero()
   attackIterateFrameHero()
   //add skull death vvvvv
   enemyBox.src = '../images/fire-skull-no-fire.gif'
@@ -351,8 +399,7 @@ function branch1AttackSkull(){
 
 function skullDeadMoveOn (){
   dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
-  // add run vvvvv
-  playerStatusImg.src = '../images/hero-idle.gif'
+  runIterateFrameHero()
   enemyBox.src = ''
   removeChoices()
   presentBranch1 = branchMergeTryGate
@@ -410,5 +457,4 @@ function gameOver(){
   enemyBox.setAttribute('hidden', true)
   inventory.setAttribute('hidden', true)
   playerStatusText.setAttribute('hidden', true)
-
 }
