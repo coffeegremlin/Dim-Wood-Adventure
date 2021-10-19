@@ -1,11 +1,11 @@
 /*----------------- Constants -----------------*/
-let heroDeathFrames = ['../hero-death/herodeath1.png', '../hero-death/herodeath2.png', '../hero-death/herodeath3.png', '../hero-death/herodeath4.png', '../hero-death/herodeath5.png', '../hero-death/herodeath6.png', '../hero-death/herodeath7.png', '../hero-death/herodeath8.png', '../hero-death/herodeath9.png', '../hero-death/herodeath10final.png']
+let heroDeathFrames = ['../images/hero-death/herodeath1.png', '../images/hero-death/herodeath2.png', '../images/hero-death/herodeath3.png', '../images/hero-death/herodeath4.png', '../images/hero-death/herodeath5.png', '../images/hero-death/herodeath6.png', '../images/hero-death/herodeath7.png', '../images/hero-death/herodeath8.png', '../images/hero-death/herodeath9.png', '../images/hero-death/herodeath10final.png']
 
-let wizardDeathFrames = ['../wizard-death/death0.png', '../wizard-death/death1.png', '../wizard-death/death2.png', '../wizard-death/death3.png', '../wizard-death/death4.png', '../wizard-death/death5.png', '../wizard-death/death6.png', ]
+let wizardDeathFrames = ['../images/wizard-death/death0.png', '../images/wizard-death/death1.png', '../images/wizard-death/death2.png', '../images/wizard-death/death3.png', '../images/wizard-death/death4.png', '../images/wizard-death/death5.png', '../images/wizard-death/death6.png', ]
 
-let wizardAttackFrames = ['../wizard-attack/Attack1.png', '../wizard-attack/Attack2.png', '../wizard-attack/Attack3.png', '../wizard-attack/Attack4.png', '../wizard-attack/Attack5.png', '../wizard-attack/Attack6.png', '../wizard-attack/Attack7.png', '../wizard-attack/Attack8.png']
+let wizardAttackFrames = ['../images/wizard-attack/Attack1.png', '../images/wizard-attack/Attack2.png', '../images/wizard-attack/Attack3.png', '../images/wizard-attack/Attack4.png', '../images/wizard-attack/Attack5.png', '../images/wizard-attack/Attack6.png', '../images/wizard-attack/Attack7.png', '../images/wizard-attack/Attack8.png']
 
-
+let heroAttackFrames = ['../images/hero-attack/hkattack1.png', '../images/hero-attack/hkattack2.png', '../images/hero-attack/hkattack3.png', '../images/hero-attack/hkattack4.png', '../images/hero-attack/hkattack5.png', '../images/hero-attack/hkattack6.png', '../images/hero-attack/hkattack7.png', '../images/hero-attack/hkattack8.png']
 /*------------- Variables (state) -------------*/
 
 let itemSilverKey = (null)
