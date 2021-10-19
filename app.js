@@ -1,5 +1,6 @@
 /*----------------- Constants -----------------*/
-
+let heroDeathFrames = ['../hero-death/herodeath1.png', '../hero-death/herodeath2.png', '../hero-death/herodeath3.png', '../hero-death/herodeath4.png', '../hero-death/herodeath5.png', '../hero-death/herodeath6.png', '../hero-death/herodeath7.png', '../hero-death/herodeath8.png', '../hero-death/herodeath9.png', '../hero-death/herodeath10final.png']
+let wizardDeathFrames = ['../wizard-death/death0.png', '../wizard-death/death1.png', '../wizard-death/death2.png', '../wizard-death/death3.png', '../wizard-death/death4.png', '../wizard-death/death5.png', '../wizard-death/death6.png', ]
 
 
 /*------------- Variables (state) -------------*/
@@ -49,8 +50,8 @@ choice2Btn.setAttribute('hidden', true)
 // presentBranch2 = 
 // addChoices()
 
-// Animation by set timeout vvv
-let heroDeathFrames = ['../hero-death/herodeath1.png', '../hero-death/herodeath2.png', '../hero-death/herodeath3.png', '../hero-death/herodeath4.png', '../hero-death/herodeath5.png', '../hero-death/herodeath6.png', '../hero-death/herodeath7.png', '../hero-death/herodeath8.png', '../hero-death/herodeath9.png', '../hero-death/herodeath10final.png']
+// Animations by set timeout vvv
+
 
 function deathIterateFrame() {
   let frame = 0
@@ -61,19 +62,20 @@ function deathIterateFrame() {
       clearInterval(frameIterator)
       // if the final death is not displayed, set src here to final frame
     }
-  }, 200);
+  }, 250);
 }
 
-// let countdownEl = document.getElementById('countdown')
-// let timeLeft= 10;
-
-// let timer = setInterval(function() {
-//     countdownEl.textContent = timeLeft + ' seconds remaining.';
-//     timeLeft -= 1;
-//     if (timeLeft < 0) {
-//         countdownEl.textContent = 'Finished!'
-//     }
-// }, 1000)
+function deathIterateFrame1() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    enemyBox.src = wizardDeathFrames[frame]
+    frame++
+    if (frame === 7){
+      clearInterval(frameIterator)
+      // if the final death is not displayed, set src here to final frame
+    }
+  }, 250);
+}
 
 // Button control/wipe function, and then add new function to button vvv
 let presentBranch1 = (null)
@@ -154,7 +156,7 @@ function branch2Walkback(){
   choice2Btn.setAttribute('hidden', true)
   // playerStatusImg.src = '../images/hero-death.gif'
   deathIterateFrame()
-  setTimeout(youAreDead, 15000);
+  setTimeout(youAreDead, 10000);
 }
 
 // Player decides to press on through the dark
@@ -199,14 +201,15 @@ function enterChurch(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function attackGhost(){
   dialog.innerText = `You swing your sword at the ghost, and it passes right through the form of the specter. It finds your advance very rude, and returns the favor in kind. You feel it get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
-  youAreDead()
+  deathIterateFrame()
+  setTimeout(youAreDead, 10000);
 }
 
 // Look for item to remove the ghost (leads to youWin)
 // Need to add a set timeout for this dialog to display before returning to youWin
 function lookForItem(){
   dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
-  youWin()
+  setTimeout(youWin, 15000);
 }
 
 // Approach the cloaked figure (branch1, branch2, and branchMergeTryGate if the player has key from branch 1 lead to this)
@@ -224,13 +227,15 @@ function branchMergeApproachFigure(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function chargeWizard(){
   dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
-  youAreDead()
+  deathIterateFrame()
+  setTimeout(youAreDead, 10000);
 }
 
 // Find cover behind gravestone
 function findCover(){
   dialog.innerText = `You take cover behind the closet gravestone as the wizard finishes his spell and aims it at you. The black oily flame bursts against the gravestone and you see it turn to snow. A ghost comes screaming out of the church above, throwing the iron gate wide open as its wail fills the sky. The wizard has angered the specter by attacking its final resting place. The ghost turns the wizard to a solid block of ice as you watch hidden behind the grave. Choice 1: Run for the church. Choice 2: You continue to keep hiding, and wait for the ghost to leave.`
   //add ghost src and set timeout for wizard death
+  deathIterateFrame1()
   removeChoices()
   presentBranch1 = runToChurch
   presentBranch2 = keepHiding
@@ -241,14 +246,15 @@ function findCover(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function keepHiding(){
   dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
-  youAreDead()
+  deathIterateFrame()
+  setTimeout(youAreDead, 10000);
 }
 
 // Run for the church (leads to youWin)
 // Need to add a set timeout for this dialog to display before returning to youWin
 function runToChurch(){
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
-  youWin()
+  setTimeout(youWin, 15000);
 }
 
 
@@ -269,7 +275,8 @@ function branch1Skull(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
-  youAreDead()
+  deathIterateFrame()
+  setTimeout(youAreDead, 10000);
 }
 
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
@@ -289,6 +296,8 @@ function skullDeadMoveOn (){
   presentBranch2 = branchMergeApproachFigure
   addChoices()
 }
+
+
 
 // END SCREEN FUNCTIONS
 
