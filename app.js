@@ -258,4 +258,6 @@ function youWin(){
 // Need to add remove attributes and hidden for every element except background box, and dialog
 function gameOver(){
   dialog.innerText = `GAME OVER. THANK YOU FOR PLAYING.`
+  choice1Btn.setAttribute('hidden', true)
+  choice2Btn.setAttribute('hidden', true)
 }
