@@ -1,6 +1,9 @@
 /*----------------- Constants -----------------*/
 let heroDeathFrames = ['../hero-death/herodeath1.png', '../hero-death/herodeath2.png', '../hero-death/herodeath3.png', '../hero-death/herodeath4.png', '../hero-death/herodeath5.png', '../hero-death/herodeath6.png', '../hero-death/herodeath7.png', '../hero-death/herodeath8.png', '../hero-death/herodeath9.png', '../hero-death/herodeath10final.png']
+
 let wizardDeathFrames = ['../wizard-death/death0.png', '../wizard-death/death1.png', '../wizard-death/death2.png', '../wizard-death/death3.png', '../wizard-death/death4.png', '../wizard-death/death5.png', '../wizard-death/death6.png', ]
+
+let wizardAttackFrames = ['../wizard-attack/Attack1.png', '../wizard-attack/Attack2.png', '../wizard-attack/Attack3.png', '../wizard-attack/Attack4.png', '../wizard-attack/Attack5.png', '../wizard-attack/Attack6.png', '../wizard-attack/Attack7.png', '../wizard-attack/Attack8.png']
 
 
 /*------------- Variables (state) -------------*/
@@ -53,7 +56,7 @@ choice2Btn.setAttribute('hidden', true)
 // Animations by set timeout vvv
 
 
-function deathIterateFrame() {
+function deathIterateFrameHero() {
   let frame = 0
   let frameIterator = setInterval(function() {
     playerStatusImg.src = heroDeathFrames[frame]
@@ -65,7 +68,7 @@ function deathIterateFrame() {
   }, 250);
 }
 
-function deathIterateFrame1() {
+function deathIterateFrameWizard() {
   let frame = 0
   let frameIterator = setInterval(function() {
     enemyBox.src = wizardDeathFrames[frame]
@@ -76,6 +79,28 @@ function deathIterateFrame1() {
     }
   }, 250);
 }
+
+function attackIterateFrameWizard() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    enemyBox.src = wizardAttackFrames[frame]
+    frame++
+    if (frame === 7){
+      clearInterval(frameIterator)
+      // add wizard idle
+    }
+  }, 300);
+}
+
+// TO DO VVVVV
+
+//add hero roll frames
+// add hero attack frames
+// add ghost appear frames
+// add ghost attack frames
+// add ghost disappear frames
+//add skull death frames
+
 
 // Button control/wipe function, and then add new function to button vvv
 let presentBranch1 = (null)
@@ -130,7 +155,7 @@ function branchStart(){
   playerStatusImg.removeAttribute('hidden', true)
   playerStatusImg.src = '../images/hero-idle.gif'
   backGround.removeAttribute ('hidden', true)
-  backGround.src = "../images/forest-background.png"
+  backGround.src = "../images/backgrounds/forest-background.png"
   presentBranch1 = branch2Dark
   presentBranch2 = branch1Skull
   addChoices()
@@ -155,7 +180,7 @@ function branch2Walkback(){
   choice1Btn.setAttribute('hidden', true)
   choice2Btn.setAttribute('hidden', true)
   // playerStatusImg.src = '../images/hero-death.gif'
-  deathIterateFrame()
+  deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
 
@@ -201,7 +226,7 @@ function enterChurch(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function attackGhost(){
   dialog.innerText = `You swing your sword at the ghost, and it passes right through the form of the specter. It finds your advance very rude, and returns the favor in kind. You feel it get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
-  deathIterateFrame()
+  deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
 
@@ -227,7 +252,7 @@ function branchMergeApproachFigure(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function chargeWizard(){
   dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
-  deathIterateFrame()
+  deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
 
@@ -235,7 +260,7 @@ function chargeWizard(){
 function findCover(){
   dialog.innerText = `You take cover behind the closet gravestone as the wizard finishes his spell and aims it at you. The black oily flame bursts against the gravestone and you see it turn to snow. A ghost comes screaming out of the church above, throwing the iron gate wide open as its wail fills the sky. The wizard has angered the specter by attacking its final resting place. The ghost turns the wizard to a solid block of ice as you watch hidden behind the grave. Choice 1: Run for the church. Choice 2: You continue to keep hiding, and wait for the ghost to leave.`
   //add ghost src and set timeout for wizard death
-  deathIterateFrame1()
+  deathIterateFrameWizard()
   removeChoices()
   presentBranch1 = runToChurch
   presentBranch2 = keepHiding
@@ -246,7 +271,7 @@ function findCover(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function keepHiding(){
   dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
-  deathIterateFrame()
+  deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
 
@@ -275,7 +300,7 @@ function branch1Skull(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
-  deathIterateFrame()
+  deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
 
