@@ -49,6 +49,32 @@ choice2Btn.setAttribute('hidden', true)
 // presentBranch2 = 
 // addChoices()
 
+// Animation by set timeout vvv
+let heroDeathFrames = ['../hero-death/herodeath1.png', '../hero-death/herodeath2.png', '../hero-death/herodeath3.png', '../hero-death/herodeath4.png', '../hero-death/herodeath5.png', '../hero-death/herodeath6.png', '../hero-death/herodeath7.png', '../hero-death/herodeath8.png', '../hero-death/herodeath9.png', '../hero-death/herodeath10final.png']
+
+function deathIterateFrame() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    playerStatusImg.src = heroDeathFrames[frame]
+    frame++
+    if (frame === 10){
+      clearInterval(frameIterator)
+      // if the final death is not displayed, set src here to final frame
+    }
+  }, 200);
+}
+
+// let countdownEl = document.getElementById('countdown')
+// let timeLeft= 10;
+
+// let timer = setInterval(function() {
+//     countdownEl.textContent = timeLeft + ' seconds remaining.';
+//     timeLeft -= 1;
+//     if (timeLeft < 0) {
+//         countdownEl.textContent = 'Finished!'
+//     }
+// }, 1000)
+
 // Button control/wipe function, and then add new function to button vvv
 let presentBranch1 = (null)
 let presentBranch2 = (null)
@@ -123,8 +149,12 @@ function branch2Dark(){
 // Player decides to walk back (leads to youAreDead)
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function branch2Walkback(){
-dialog.innerText = `You decide to walk back, you can’t go further if you can’t see. As you turn around, you run headfirst into a wall of razor sharp thorns that seemingly appeared out of nowhere. You are caught on the wall, and slowly lose consciousness as you bleed out. You are dead.`
-setTimeout(youAreDead(), 10000);
+  dialog.innerText = `You decide to walk back, you can’t go further if you can’t see. As you turn around, you run headfirst into a wall of razor sharp thorns that seemingly appeared out of nowhere. You are caught on the wall, and slowly lose consciousness as you bleed out. You are dead.`
+  choice1Btn.setAttribute('hidden', true)
+  choice2Btn.setAttribute('hidden', true)
+  // playerStatusImg.src = '../images/hero-death.gif'
+  deathIterateFrame()
+  setTimeout(youAreDead, 15000);
 }
 
 // Player decides to press on through the dark
@@ -267,6 +297,7 @@ function youAreDead(){
   winLoseMessage.innerText = `YOU LOSE`
   //set backround to fade to black
   //add game over 10,9,8... countdown timer
+  playerStatusImg.src = '../hero-death/herodeath10final.png'
   dialog.innerText = `YOU ARE DEAD. Choice 1: TRY AGAIN? Choice 2: NO.`
   removeChoices()
   presentBranch1 = tryAgain
