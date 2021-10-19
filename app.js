@@ -6,6 +6,9 @@ let wizardDeathFrames = ['../images/wizard-death/death0.png', '../images/wizard-
 let wizardAttackFrames = ['../images/wizard-attack/Attack1.png', '../images/wizard-attack/Attack2.png', '../images/wizard-attack/Attack3.png', '../images/wizard-attack/Attack4.png', '../images/wizard-attack/Attack5.png', '../images/wizard-attack/Attack6.png', '../images/wizard-attack/Attack7.png', '../images/wizard-attack/Attack8.png']
 
 let heroAttackFrames = ['../images/hero-attack/hkattack1.png', '../images/hero-attack/hkattack2.png', '../images/hero-attack/hkattack3.png', '../images/hero-attack/hkattack4.png', '../images/hero-attack/hkattack5.png', '../images/hero-attack/hkattack6.png', '../images/hero-attack/hkattack7.png', '../images/hero-attack/hkattack8.png']
+
+let heroRollFrames = ['../images/', ]
+
 /*------------- Variables (state) -------------*/
 
 let itemSilverKey = (null)
@@ -92,10 +95,20 @@ function attackIterateFrameWizard() {
   }, 300);
 }
 
+function attackIterateFrameHero() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    playerStatusImg.src = heroAttackFrames[frame]
+    frame++
+    if (frame === 10){
+      clearInterval(frameIterator)
+      playerStatusImg.src = '../images/hero-idle.gif'
+    }
+  }, 250);
+}
 // TO DO VVVVV
 
 //add hero roll frames
-// add hero attack frames
 // add ghost appear frames
 // add ghost attack frames
 // add ghost disappear frames
@@ -118,6 +131,19 @@ function addChoices(){
   choice2Btn.addEventListener('click', presentBranch2)
 }
 
+function hideButtons(){
+  choice1Btn.setAttribute('hidden', true)
+  choice2Btn.setAttribute('hidden', true)
+}
+function revealButtons(){
+  choice1Btn.removeAttribute('hidden', true)
+  choice2Btn.removeAttribute('hidden', true)
+}
+
+
+
+// Game functionality for looping/starting vvv
+
 function tryAgain(){
   removeChoices()
   backGround.setAttribute('hidden', true)
@@ -126,8 +152,7 @@ function tryAgain(){
   playerStatusImg.setAttribute('hidden', true)
   playerStatusText.innerText = ''
   startBtn.removeAttribute('hidden', true)
-  choice1Btn.setAttribute('hidden', true)
-  choice2Btn.setAttribute('hidden', true)
+  hideButtons()
   dialog.innerText = '...'
   winLoseMessage.innerText = ''
   itemSilverKey = (null)
@@ -138,11 +163,11 @@ function tryAgain(){
 function startGame(){
   startBtn.removeEventListener('click', startGame)
   startBtn.setAttribute('hidden', true)
-  choice1Btn.removeAttribute('hidden', true)
-  choice2Btn.removeAttribute('hidden', true)
+  revealButtons()
   branchStart()
   console.log('startGame ran')
 }
+
 
 
 // Story branch functions for game vvv
@@ -150,8 +175,6 @@ function startGame(){
 // first choice for player
 function branchStart(){
   dialog.innerText = `You’ve ventured into the forest of Dim Wood in search of reaching hidden treasure. As you stand before the trees, you see two paths lie in front of you. Choice 1: A dark opening in the trees that has no sound. Choice 2: A faint light dances down a dark path with soft laughter.`
-//   backGround.removeAttribute('hidden'
-// , true)
   playerStatusImg.removeAttribute('hidden', true)
   playerStatusImg.src = '../images/hero-idle.gif'
   backGround.removeAttribute ('hidden', true)
@@ -177,9 +200,7 @@ function branch2Dark(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function branch2Walkback(){
   dialog.innerText = `You decide to walk back, you can’t go further if you can’t see. As you turn around, you run headfirst into a wall of razor sharp thorns that seemingly appeared out of nowhere. You are caught on the wall, and slowly lose consciousness as you bleed out. You are dead.`
-  choice1Btn.setAttribute('hidden', true)
-  choice2Btn.setAttribute('hidden', true)
-  // playerStatusImg.src = '../images/hero-death.gif'
+  hideButtons()
   deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
@@ -226,6 +247,9 @@ function enterChurch(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function attackGhost(){
   dialog.innerText = `You swing your sword at the ghost, and it passes right through the form of the specter. It finds your advance very rude, and returns the favor in kind. You feel it get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
+  hideButtons()
+  attackIterateFrameHero()
+  // add ghost attack
   deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
@@ -234,6 +258,7 @@ function attackGhost(){
 // Need to add a set timeout for this dialog to display before returning to youWin
 function lookForItem(){
   dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
+  hideButtons()
   setTimeout(youWin, 15000);
 }
 
@@ -252,6 +277,9 @@ function branchMergeApproachFigure(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function chargeWizard(){
   dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
+  hideButtons()
+  // add hero run
+  attackIterateFrameHero()
   deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
@@ -271,6 +299,8 @@ function findCover(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function keepHiding(){
   dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
+  hideButtons()
+  // add ghost attack
   deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
@@ -279,6 +309,8 @@ function keepHiding(){
 // Need to add a set timeout for this dialog to display before returning to youWin
 function runToChurch(){
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
+  hideButtons()
+  // add run
   enemyBox.src = ''
   setTimeout(youWin, 15000);
 }
@@ -301,6 +333,8 @@ function branch1Skull(){
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
+  hideButtons()
+  // add skull attack
   deathIterateFrameHero()
   setTimeout(youAreDead, 10000);
 }
@@ -308,7 +342,8 @@ function branch1IgnoreSkull(){
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
-  //add skull death src
+  attackIterateFrameHero()
+  //add skull death vvvvv
   enemyBox.src = '../images/fire-skull-no-fire.gif'
   itemSilverKey = (true)
   skullDeadMoveOn()
@@ -316,6 +351,8 @@ function branch1AttackSkull(){
 
 function skullDeadMoveOn (){
   dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  // add run vvvvv
+  playerStatusImg.src = '../images/hero-idle.gif'
   enemyBox.src = ''
   removeChoices()
   presentBranch1 = branchMergeTryGate
@@ -330,29 +367,34 @@ function skullDeadMoveOn (){
 // You are dead screen function (leads to gameover or branchStart)
 function youAreDead(){
   winLoseMessage.innerText = `YOU LOSE`
+
   //set backround to fade to black
   //add game over 10,9,8... countdown timer
+
   playerStatusImg.src = '../hero-death/herodeath10final.png'
   enemyBox.src = ''
   dialog.innerText = `YOU ARE DEAD. Choice 1: TRY AGAIN? Choice 2: NO.`
-  choice1Btn.removeAttribute('hidden', true)
-  choice2Btn.removeAttribute('hidden', true)
   removeChoices()
   presentBranch1 = tryAgain
   presentBranch2 = gameOver
   addChoices()
+  revealButtons()
   console.log('youaredead ran')
 }
 
 // You win screen for player (leads to gameover or branchStart)
 function youWin(){
   enemyBox.src = ''
+  //set backround to fade to black
+  //add game over 10,9,8... countdown timer
+  //add triumphant hero src frame
   winLoseMessage.innerText = `YOU WIN`
   dialog.innerText = `Choice 1: TRY AGAIN? Choice 2: NO.`
   removeChoices()
   presentBranch1 = tryAgain
   presentBranch2 = gameOver
   addChoices()
+  revealButtons()
   console.log('youWin ran')
 }
 
@@ -361,20 +403,12 @@ function youWin(){
 function gameOver(){
   dialog.innerText = `GAME OVER. THANK YOU FOR PLAYING.`
   enemyBox.setAttribute('hidden', true)
-  
-  choice1Btn.setAttribute('hidden', true)
-  choice2Btn.setAttribute('hidden', true)
+  removeChoices()
+  hideButtons()
+  winLoseMessage.setAttribute('hidden', true)
+  //set background black
+  enemyBox.setAttribute('hidden', true)
+  inventory.setAttribute('hidden', true)
+  playerStatusText.setAttribute('hidden', true)
+
 }
-
-// const winLoseMessage = document.querySelector('#win-lose-message')
-// const backGround = document.querySelector('#background')
-// const enemyBox = document.querySelector('#enemy')
-// const dialog = document.querySelector('#dialog-box')
-
-// const inventory = document.querySelector('#inventory')
-// const choice1Btn = document.querySelector('#choice1')
-// const choice2Btn = document.querySelector('#choice2')
-
-// const startBtn = document.querySelector('#start')
-// const playerStatusText = document.querySelector('#current-status')
-// const playerStatusImg = document.querySelector('#player-status')
