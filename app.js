@@ -299,6 +299,8 @@ function youAreDead(){
   //add game over 10,9,8... countdown timer
   playerStatusImg.src = '../hero-death/herodeath10final.png'
   dialog.innerText = `YOU ARE DEAD. Choice 1: TRY AGAIN? Choice 2: NO.`
+  choice1Btn.removeAttribute('hidden', true)
+  choice2Btn.removeAttribute('hidden', true)
   removeChoices()
   presentBranch1 = tryAgain
   presentBranch2 = gameOver
