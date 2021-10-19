@@ -6,7 +6,8 @@ export {
 //
 const gameDisplayEffects[
   {
-    
+    gameScreen: ,
+    newGameScreen: ,
   },
   {
 

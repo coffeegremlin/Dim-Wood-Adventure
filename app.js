@@ -66,6 +66,10 @@ function addChoices(){
 }
 
 function tryAgain(){
+  backGround.setAttribute('hidden', true)
+  enemyBox.setAttribute('hidden', true)
+  playerStatusImg.setAttribute('hidden', true)
+  playerStatusText.innerText = ''
   startBtn.removeAttribute('hidden', true)
   startBtn.addEventListener('click', startGame)
   choice1Btn.setAttribute('hidden', true)
@@ -90,6 +94,12 @@ function startGame(){
 // first choice for player
 function branchStart(){
   dialog.innerText = `You’ve ventured into the forest of Dim Wood in search of reaching hidden treasure. As you stand before the trees, you see two paths lie in front of you. Choice 1: A dark opening in the trees that has no sound. Choice 2: A faint light dances down a dark path with soft laughter.`
+//   backGround.removeAttribute('hidden'
+// , true)
+  playerStatusImg.removeAttribute('hidden', true)
+  playerStatusImg.src = '../images/hero-idle.gif'
+  backGround.removeAttribute ('hidden', true)
+  backGround.src = "../images/forest-background.png"
   presentBranch1 = branch2Dark
   presentBranch2 = branch1Skull
   addChoices()
@@ -143,6 +153,8 @@ function branchMergeTryGate(){
 // Choose church
 function enterChurch(){
   dialog.innerText = `You decide whatever the cloaked figure is doing, if it’s in a graveyard it can’t be good. You walk to the church doors and heave them open. You see a ghost hovering in front of a gilded chest. Choice 1: Attack the ghost to get to the gilded chest. Choice 2: Silently look around for something to get rid of the ghost, and hope it doesn’t hear or see you moving about.`
+  enemyBox.removeAttribute('hidden', true)
+  // add ghost src
   removeChoices()
   presentBranch1 = attackGhost
   presentBranch2 = lookForItem
@@ -166,6 +178,8 @@ function lookForItem(){
 // Approach the cloaked figure (branch1, branch2, and branchMergeTryGate if the player has key from branch 1 lead to this)
 function branchMergeApproachFigure(){
   dialog.innerText = `You decide to approach the cloaked figure, and as you draw near, you see it’s a dark wizard with yellowed skin drawn taught against his sallow bones. The wizard begin to gather oily black light atop his staff. Choice 1: Charge the wizard, hoping to reach him before he finishes casting his spell. Choice 2: Find a grave stone to take cover behind.`
+  enemyBox.removeAttribute('hidden', true)
+  // add wizard src
   removeChoices()
   presentBranch1 = chargeWizard
   presentBranch2 = findCover
@@ -182,6 +196,7 @@ function chargeWizard(){
 // Find cover behind gravestone
 function findCover(){
   dialog.innerText = `You take cover behind the closet gravestone as the wizard finishes his spell and aims it at you. The black oily flame bursts against the gravestone and you see it turn to snow. A ghost comes screaming out of the church above, throwing the iron gate wide open as its wail fills the sky. The wizard has angered the specter by attacking its final resting place. The ghost turns the wizard to a solid block of ice as you watch hidden behind the grave. Choice 1: Run for the church. Choice 2: You continue to keep hiding, and wait for the ghost to leave.`
+  //add ghost src and set timeout for wizard death
   removeChoices()
   presentBranch1 = runToChurch
   presentBranch2 = keepHiding
@@ -208,6 +223,8 @@ function runToChurch(){
 // Investigate the light/laughter branch
 function branch1Skull(){
   dialog.innerText = `As you walk down the path, deciding to investigate what the light is, you see it turns out to be a flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the skull, hoping you might catch it by surprise.`
+  enemyBox.removeAttribute('hidden', true)
+  // add skull src
   removeChoices()
   presentBranch1 = branch1IgnoreSkull
   presentBranch2 = branch1AttackSkull
@@ -224,6 +241,7 @@ function branch1IgnoreSkull(){
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key! As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  //add skull death src
   itemSilverKey = (true)
   removeChoices()
   presentBranch1 = branchMergeTryGate
@@ -236,6 +254,9 @@ function branch1AttackSkull(){
 
 // You are dead screen function (leads to gameover or branchStart)
 function youAreDead(){
+  winLoseMessage.innerText = `YOU LOSE`
+  //set backround to fade to black
+  //add game over 10,9,8... countdown timer
   dialog.innerText = `YOU ARE DEAD. Choice 1: TRY AGAIN? Choice 2: NO.`
   removeChoices()
   presentBranch1 = tryAgain
@@ -246,7 +267,8 @@ function youAreDead(){
 
 // You win screen for player (leads to gameover or branchStart)
 function youWin(){
-  dialog.innerText = `YOU WIN! Choice 1: TRY AGAIN? Choice 2: NO.`
+  winLoseMessage.innerText = `YOU WIN`
+  dialog.innerText = `Choice 1: TRY AGAIN? Choice 2: NO.`
   removeChoices()
   presentBranch1 = tryAgain
   presentBranch2 = gameOver
@@ -258,6 +280,21 @@ function youWin(){
 // Need to add remove attributes and hidden for every element except background box, and dialog
 function gameOver(){
   dialog.innerText = `GAME OVER. THANK YOU FOR PLAYING.`
+  enemyBox.setAttribute('hidden', true)
+  
   choice1Btn.setAttribute('hidden', true)
   choice2Btn.setAttribute('hidden', true)
 }
+
+// const winLoseMessage = document.querySelector('#win-lose-message')
+// const backGround = document.querySelector('#background')
+// const enemyBox = document.querySelector('#enemy')
+// const dialog = document.querySelector('#dialog-box')
+
+// const inventory = document.querySelector('#inventory')
+// const choice1Btn = document.querySelector('#choice1')
+// const choice2Btn = document.querySelector('#choice2')
+
+// const startBtn = document.querySelector('#start')
+// const playerStatusText = document.querySelector('#current-status')
+// const playerStatusImg = document.querySelector('#player-status')
