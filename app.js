@@ -66,6 +66,7 @@ function addChoices(){
 }
 
 function tryAgain(){
+  removeChoices()
   backGround.setAttribute('hidden', true)
   enemyBox.setAttribute('hidden', true)
   playerStatusImg.setAttribute('hidden', true)
@@ -75,8 +76,10 @@ function tryAgain(){
   choice1Btn.setAttribute('hidden', true)
   choice2Btn.setAttribute('hidden', true)
   dialog.innerText = '...'
+  winLoseMessage.innerText = ''
   itemSilverKey = (null)
   console.log('Try again function ran')
+  startGame()
 }
 
 function startGame(){
@@ -116,11 +119,12 @@ function branch2Dark(){
   console.log('branch2Dark ran')
 }
 
+
 // Player decides to walk back (leads to youAreDead)
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function branch2Walkback(){
-dialog.innerText = `You decide to walk back, you can’t go further if you can’t see. As you turn around, you run headfirst into a wall of razor sharp thorns that seemingly appeared out of nowhere. You are caught on the wall, and slowly lose consciousness. You are dead.`
-youAreDead()
+dialog.innerText = `You decide to walk back, you can’t go further if you can’t see. As you turn around, you run headfirst into a wall of razor sharp thorns that seemingly appeared out of nowhere. You are caught on the wall, and slowly lose consciousness as you bleed out. You are dead.`
+setTimeout(youAreDead(), 10000);
 }
 
 // Player decides to press on through the dark
@@ -224,7 +228,7 @@ function runToChurch(){
 function branch1Skull(){
   dialog.innerText = `As you walk down the path, deciding to investigate what the light is, you see it turns out to be a flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the skull, hoping you might catch it by surprise.`
   enemyBox.removeAttribute('hidden', true)
-  // add skull src
+  enemyBox.src = '../images/fire-skull.gif'
   removeChoices()
   presentBranch1 = branch1IgnoreSkull
   presentBranch2 = branch1AttackSkull
@@ -240,15 +244,21 @@ function branch1IgnoreSkull(){
 
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
-  dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key! As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
   //add skull death src
+  enemyBox.src = '../images/fire-skull-no-fire.gif'
   itemSilverKey = (true)
+  skullDeadMoveOn()
+}
+
+function skullDeadMoveOn (){
+  dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  enemyBox.src = ''
   removeChoices()
   presentBranch1 = branchMergeTryGate
   presentBranch2 = branchMergeApproachFigure
   addChoices()
 }
-
 
 // END SCREEN FUNCTIONS
 
