@@ -363,6 +363,8 @@ function attackGhost(){
 // Need to add a set timeout for this dialog to display before returning to youWin
 function lookForItem(){
   dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
+  // add ghost death
+  // enemyBox.setAttribute('hidden'), true
   hideButtons()
   setTimeout(youWin, 10000)
   setTimeout(churchMusicStop, 9999)
