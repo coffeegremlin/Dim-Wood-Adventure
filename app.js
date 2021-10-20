@@ -8,6 +8,30 @@ const deadMusic = new Audio('../audio/reaching-the-event-horizon.mp3')
 const winMusic = new Audio('../audio/Extinction.mp3')
 const gameOverMusic = new Audio('../audio/they-will-be-here-any-minute.mp3')
 
+// function startMusicStop(){
+
+// }
+function backgroundMusicStop(){
+  backgroundMusic.pause()
+  backgroundMusic.currentTime = 0
+}
+function graveMusicStop(){
+  graveyardYardMusic.pause()
+  graveYardMusic.currentTime = 0
+}
+function churchMusicStop(){
+  churchMusic.pause()
+  churchMusic.currentTime = 0
+}
+function deadMusicStop(){
+  deadMusic.pause()
+  deadMusic.currentTime = 0
+}
+function winMusicStop(){
+  winMusic.pause()
+  winMusic.currentTime = 0
+}
+
 let demonAttackFrames = ['../images/demon-attack/da1.png', '../images/demon-attack/da2.png', '../images/demon-attack/da3.png', '../images/demon-attack/da4.png', '../images/demon-attack/da5.png', '../images/demon-attack/da6.png', '../images/demon-attack/da7.png', '../images/demon-attack/da8.png', '../images/demon-attack/da9.png', '../images/demon-attack/da10.png', '../images/demon-attack/da11.png']
 
 let skullAttackFrames = ['../images/skull-attack/skull1.png', '../images/skull-attack/skull2.png', '../images/skull-attack/fire1.png', '../images/skull-attack/fire2.png', '../images/skull-attack/fire3.png', '../images/skull-attack/fire4.png', '../images/skull-attack/fire5.png']
@@ -36,6 +60,7 @@ let totalChoices = []
 const winLoseMessage = document.querySelector('#win-lose-message')
 const backGround = document.querySelector('#background')
 const enemyBox = document.querySelector('#enemy')
+const enemyOrItemBox = document.querySelector('#enemy2-or-item')
 const dialog = document.querySelector('#dialog-box')
 
 const inventory = document.querySelector('#inventory')
@@ -195,7 +220,7 @@ function revealButtons(){
 function tryAgain(){
   // startMusic.volume = 0.1
   // startMusic.play
-  backgroundMusic
+  backgroundMusicStop()
   removeChoices()
   backGround.setAttribute('hidden', true)
   enemyBox.setAttribute('hidden', true)
@@ -261,6 +286,7 @@ function branch2Walkback(){
 
 // Player decides to press on through the dark
 function branch2PressOn(){
+  backgroundMusicStop()
   graveyardYardMusic.volume = 0.1
   graveyardYardMusic.play()
   dialog.innerText = `You decide to press on further, hoping your eyes might adjust. The forest can only get so dark, it must eventually get lighter. It turns out that was a wise decision. Your optimism pays off as you press forward, and see the a path filled with lanterns leading you to a graveyard. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
@@ -291,6 +317,7 @@ function branchMergeTryGate(){
 
 // Choose church
 function enterChurch(){
+  graveMusicStop()
   churchMusic.volume = 0.1
   churchMusic.play()
   dialog.innerText = `You decide whatever the cloaked figure is doing, if it’s in a graveyard it can’t be good. You walk to the church doors and heave them open. You see a ghost hovering in front of a gilded chest. Choice 1: Attack the ghost to get to the gilded chest. Choice 2: Silently look around for something to get rid of the ghost, and hope it doesn’t hear or see you moving about.`
@@ -417,6 +444,7 @@ function branch1AttackSkull(){
 }
 
 function skullDeadMoveOn (){
+  backgroundMusicStop()
   graveyardYardMusic.volume = 0.1
   graveyardYardMusic.play()
   dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
@@ -434,6 +462,7 @@ function skullDeadMoveOn (){
 
 // You are dead screen function (leads to gameover or branchStart)
 function youAreDead(){
+  // add stop functions for all possible music tracks here
   deadMusic.volume = 0.1
   deadMusic.play()
   winLoseMessage.innerText = `YOU LOSE`
@@ -454,6 +483,7 @@ function youAreDead(){
 
 // You win screen for player (leads to gameover or branchStart)
 function youWin(){
+  // add stop functions for all possible music tracks here
   winMusic.volume = 0.1
   winMusic.play()
   enemyBox.src = ''
@@ -473,6 +503,10 @@ function youWin(){
 // Game over function for end screen
 // Need to add remove attributes and hidden for every element except background box, and dialog
 function gameOver(){
+  deadMusicStop()
+  winMusicStop()
+  gameOverMusic.volume = 0.1
+  gameOverMusic.play()
   dialog.innerText = `GAME OVER. THANK YOU FOR PLAYING.`
   enemyBox.setAttribute('hidden', true)
   removeChoices()
@@ -480,6 +514,7 @@ function gameOver(){
   winLoseMessage.setAttribute('hidden', true)
   //set background black
   enemyBox.setAttribute('hidden', true)
+  enemyOrItemBox.setAttribute('hidden', true)
   inventory.setAttribute('hidden', true)
   playerStatusText.setAttribute('hidden', true)
 }
