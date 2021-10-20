@@ -232,9 +232,7 @@ function tryAgain(){
   removeChoices()
   backGround.setAttribute('hidden', true)
   enemyBox.setAttribute('hidden', true)
-  playerStatusImg.src = ''
   playerStatusImg.setAttribute('hidden', true)
-  playerStatusText.innerText = ''
   startBtn.removeAttribute('hidden', true)
   hideButtons()
   dialog.innerText = '...'
@@ -422,6 +420,8 @@ function keepHiding(){
 // Need to add a set timeout for this dialog to display before returning to youWin
 function runToChurch(){
   graveMusicStop()
+  churchMusic.volume = 0.1
+  churchMusic.play()
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
   backGround.src = "../images/backgrounds/church-interior-background.png"
   removeChoices()
@@ -432,7 +432,7 @@ function runToChurch(){
   enemyOrItemBox.src = ''
   // change enemyBox to chest?? ^^^
   setTimeout(youWin, 10000)
-  setTimeout(graveMusicStop, 9999)
+  setTimeout(churchMusicStop, 9999)
 }
 
 
@@ -514,10 +514,6 @@ function youAreDead(){
 
 // You win screen for player (leads to gameover or branchStart)
 function youWin(){
-  removeChoices()
-  presentBranch1 = tryAgain
-  presentBranch2 = gameOver
-  addChoices()
   winMusic.volume = 0.1
   winMusic.play()
   enemyBox.src = ''
@@ -527,6 +523,10 @@ function youWin(){
   winLoseMessage.innerText = `YOU WIN`
   dialog.innerText = `Choice 1: TRY AGAIN? Choice 2: NO.`
   revealButtons()
+  removeChoices()
+  presentBranch1 = tryAgain
+  presentBranch2 = gameOver
+  addChoices()
   console.log('youWin ran')
 }
 
