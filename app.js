@@ -14,7 +14,7 @@ let heroAttackFrames = ['../images/hero-attack/hkattack1.png', '../images/hero-a
 
 let heroRollFrames = ['../images/hero-roll/hkr1.png', '../images/hero-roll/hkr2.png', '../images/hero-roll/hkr3.png', '../images/hero-roll/hkr4.png', '../images/hero-roll/hkr5.png', '../images/hero-roll/hkr6.png', '../images/hero-roll/hkr7.png', '../images/hero-roll/hkr8.png']
 
-heroRunFrames ['../image/hero-run/hkrun1.png', '../image/hero-run/hkrun2.png', '../image/hero-run/hkrun3.png', '../image/hero-run/hkrun4.png', '../image/hero-run/hkrun5.png', '../image/hero-run/hkrun6.png', '../image/hero-run/hkrun7.png', '../image/hero-run/hkrun8.png', '../image/hero-run/hkrun9.png', '../image/hero-run/hkrun10.png', ]
+let heroRunFrames = ['../images/hero-run/hkrun1.png', '../images/hero-run/hkrun2.png', '../images/hero-run/hkrun3.png', '../images/hero-run/hkrun4.png', '../images/hero-run/hkrun5.png', '../images/hero-run/hkrun6.png', '../images/hero-run/hkrun7.png', '../images/hero-run/hkrun8.png', '../images/hero-run/hkrun9.png', '../images/hero-run/hkrun10.png']
 
 /*------------- Variables (state) -------------*/
 
@@ -69,7 +69,7 @@ function attackIterateFrameDemon() {
       clearInterval(frameIterator)
       enemyBox.src = '../images/demon-idle.gif'
     }
-  }, 250);
+  }, 200);
 }
 function attackIterateFrameSkull() {
   let frame = 0
@@ -78,8 +78,9 @@ function attackIterateFrameSkull() {
     frame++
     if (frame === 7){
       clearInterval(frameIterator)
+      enemyBox.src = '../images/fire-skull.gif'
     }
-  }, 250);
+  }, 100);
 }
 function deathIterateFrameWizard() {
   let frame = 0
@@ -89,7 +90,7 @@ function deathIterateFrameWizard() {
     if (frame === 7){
       clearInterval(frameIterator)
     }
-  }, 250);
+  }, 200);
 }
 function attackIterateFrameWizard() {
   let frame = 0
@@ -100,7 +101,7 @@ function attackIterateFrameWizard() {
       clearInterval(frameIterator)
       enemyBox.src = '../images/wizard-idle.gif'
     }
-  }, 300);
+  }, 250);
 }
 function deathIterateFrameHero() {
   let frame = 0
@@ -111,7 +112,7 @@ function deathIterateFrameHero() {
       clearInterval(frameIterator)
       // if the final death is not displayed, set src here to final frame
     }
-  }, 250);
+  }, 300);
 }
 function attackIterateFrameHero() {
   let frame = 0
@@ -122,7 +123,7 @@ function attackIterateFrameHero() {
       clearInterval(frameIterator)
       playerStatusImg.src = '../images/hero-idle.gif'
     }
-  }, 250);
+  }, 200);
 }
 function rollIterateFrameHero() {
   let frame = 0
@@ -132,7 +133,7 @@ function rollIterateFrameHero() {
     if (frame === 9){
       clearInterval(frameIterator)
     }
-  }, 250);
+  }, 200);
 }
 function runIterateFrameHero() {
   let frame = 0
@@ -144,7 +145,7 @@ function runIterateFrameHero() {
       clearInterval(frameIterator)
       playerStatusImg.src = '../images/hero-idle.gif'
     }
-  }, 250);
+  }, 200);
 }
 
 // TO DO VVVVV
