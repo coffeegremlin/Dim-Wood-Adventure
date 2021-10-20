@@ -1,23 +1,21 @@
 /*----------------- Constants -----------------*/
 
+// Music imports and functions for pausing vvv
 const backgroundMusic =  new Audio('../audio/arrival-to-carcosa.mp3')
 const startMusic = new Audio('../audio/Twilight.mp3')
-const graveyardYardMusic = new Audio('../audio/horror-piano.mp3')
+const graveyardMusic = new Audio('../audio/horror-piano.mp3')
 const churchMusic = new Audio('../audio/return-to-the-nightmare.mp3')
 const deadMusic = new Audio('../audio/reaching-the-event-horizon.mp3')
 const winMusic = new Audio('../audio/Extinction.mp3')
 const gameOverMusic = new Audio('../audio/they-will-be-here-any-minute.mp3')
 
-// function startMusicStop(){
-
-// }
 function backgroundMusicStop(){
   backgroundMusic.pause()
   backgroundMusic.currentTime = 0
 }
 function graveMusicStop(){
-  graveyardYardMusic.pause()
-  graveYardMusic.currentTime = 0
+  graveyardMusic.pause()
+  graveyardMusic.currentTime = 0
 }
 function churchMusicStop(){
   churchMusic.pause()
@@ -32,6 +30,8 @@ function winMusicStop(){
   winMusic.currentTime = 0
 }
 
+
+// Frame library in arrays vvv
 let demonAttackFrames = ['../images/demon-attack/da1.png', '../images/demon-attack/da2.png', '../images/demon-attack/da3.png', '../images/demon-attack/da4.png', '../images/demon-attack/da5.png', '../images/demon-attack/da6.png', '../images/demon-attack/da7.png', '../images/demon-attack/da8.png', '../images/demon-attack/da9.png', '../images/demon-attack/da10.png', '../images/demon-attack/da11.png']
 
 let skullAttackFrames = ['../images/skull-attack/skull1.png', '../images/skull-attack/skull2.png', '../images/skull-attack/fire1.png', '../images/skull-attack/fire2.png', '../images/skull-attack/fire3.png', '../images/skull-attack/fire4.png', '../images/skull-attack/fire5.png']
@@ -50,7 +50,7 @@ let heroRunFrames = ['../images/hero-run/hkrun1.png', '../images/hero-run/hkrun2
 
 /*------------- Variables (state) -------------*/
 
-let itemSilverKey = (null)
+let itemSilverKey = (false)
 
 // Log how many clicks/choice player made and use this to display at end?
 let totalChoices = []
@@ -81,10 +81,7 @@ choice2Btn.setAttribute('hidden', true)
 
 // Steps to flesh out functions vvv
 // On start, load the game for the first branch, start playing music (make sure the selected audio will loop).
-// the dialog box will be changed with every fuction of current branch of the game.
 // Change audio depending on startGame, youAreDead, youWin, gameOver.
-  // for every story branch function use the removeChoice function ath the bottom, and then update the buttons to lead to the next related branch/story function.
-    // choice1Btn.onClick(){load selected function}
 // Either add or change background, add or change enemy(if relevant).
   // Depending on branch, animate/run gif of player status(attack, roll, death, etc.)
     // Also animate/run gif of enemy status(on top of background box on the right.)
@@ -218,8 +215,8 @@ function revealButtons(){
 
 
 function tryAgain(){
-  // startMusic.volume = 0.1
-  // startMusic.play
+  deadMusicStop()
+  winMusicStop()
   backgroundMusicStop()
   removeChoices()
   backGround.setAttribute('hidden', true)
@@ -281,15 +278,17 @@ function branch2Walkback(){
   dialog.innerText = `You decide to walk back, you can’t go further if you can’t see. As you turn around, you run headfirst into a wall of razor sharp thorns that seemingly appeared out of nowhere. You are caught on the wall, and slowly lose consciousness as you bleed out. You are dead.`
   hideButtons()
   deathIterateFrameHero()
-  setTimeout(youAreDead, 10000);
+  setTimeout(youAreDead, 8000)
+  setTimeout(backgroundMusicStop, 7999)
 }
 
 // Player decides to press on through the dark
 function branch2PressOn(){
   backgroundMusicStop()
-  graveyardYardMusic.volume = 0.1
-  graveyardYardMusic.play()
+  graveyardMusic.volume = 0.1
+  graveyardMusic.play()
   dialog.innerText = `You decide to press on further, hoping your eyes might adjust. The forest can only get so dark, it must eventually get lighter. It turns out that was a wise decision. Your optimism pays off as you press forward, and see the a path filled with lanterns leading you to a graveyard. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  backGround.src = "../images/backgrounds/graveyard-background.png"
   runIterateFrameHero()
   removeChoices()
   presentBranch1 = branchMergeTryGate
@@ -321,6 +320,7 @@ function enterChurch(){
   churchMusic.volume = 0.1
   churchMusic.play()
   dialog.innerText = `You decide whatever the cloaked figure is doing, if it’s in a graveyard it can’t be good. You walk to the church doors and heave them open. You see a ghost hovering in front of a gilded chest. Choice 1: Attack the ghost to get to the gilded chest. Choice 2: Silently look around for something to get rid of the ghost, and hope it doesn’t hear or see you moving about.`
+  backGround.src = "../images/backgrounds/church-interior-background.png"
   runIterateFrameHero()
   enemyBox.removeAttribute('hidden', true)
   
@@ -338,8 +338,10 @@ function attackGhost(){
   hideButtons()
   attackIterateFrameHero()
   // add ghost attack
+  // add if/else statement to possibly slice through ghost
   setTimeout(deathIterateFrameHero, 100)
-  setTimeout(youAreDead, 10000);
+  setTimeout(youAreDead, 8000)
+  setTimeout(churchMusicStop, 7999)
 }
 
 // Look for item to remove the ghost (leads to youWin)
@@ -347,7 +349,8 @@ function attackGhost(){
 function lookForItem(){
   dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
   hideButtons()
-  setTimeout(youWin, 15000);
+  setTimeout(youWin, 10000)
+  setTimeout(churchMusicStop, 9999)
 }
 
 // Approach the cloaked figure (branch1, branch2, and branchMergeTryGate if the player has key from branch 1 lead to this)
@@ -369,7 +372,8 @@ function chargeWizard(){
   runIterateFrameHero()
   setTimeout(attackIterateFrameWizard, 100)
   setTimeout(deathIterateFrameHero, 200)
-  setTimeout(youAreDead, 15000);
+  setTimeout(youAreDead, 8000)
+  setTimeout(graveMusicStop, 7999)
 }
 
 // Find cover behind gravestone
@@ -393,18 +397,22 @@ function keepHiding(){
   hideButtons()
   attackIterateFrameDemon()
   setTimeout(deathIterateFrameHero, 150)
-  setTimeout(youAreDead, 10000);
+  setTimeout(youAreDead, 8000)
+  setTimeout(graveMusicStop, 7999)
 }
 
 // Run for the church (leads to youWin)
 // Need to add a set timeout for this dialog to display before returning to youWin
 function runToChurch(){
+  graveMusicStop()
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
+  backGround.src = "../images/backgrounds/church-interior-background.png"
   hideButtons()
   runIterateFrameHero()
   enemyBox.src = ''
   // change enemyBox to chest?? ^^^
-  setTimeout(youWin, 15000);
+  setTimeout(youWin, 10000)
+  setTimeout(graveMusicStop, 9999)
 }
 
 
@@ -429,29 +437,31 @@ function branch1IgnoreSkull(){
   rollIterateFrameHero()
   setTimeout(attackIterateFrameSkull, 150)
   setTimeout(deathIterateFrameHero, 200)
-  setTimeout(youAreDead, 10000);
+  setTimeout(youAreDead, 8000)
+  setTimeout(backgroundMusicStop, 7999)
 }
 
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
+  removeChoices()
   runIterateFrameHero()
   setTimeout(attackIterateFrameHero, 150)
   //add skull death vvvvv
   enemyBox.src = '../images/fire-skull-no-fire.gif'
   itemSilverKey = (true)
-  skullDeadMoveOn()
+  setTimeout(skullDeadMoveOn, 8000)
 }
 
 function skullDeadMoveOn (){
   backgroundMusicStop()
-  graveyardYardMusic.volume = 0.1
-  graveyardYardMusic.play()
+  graveyardMusic.volume = 0.1
+  graveyardMusic.play()
   dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  backGround.src = "../images/backgrounds/graveyard-background.png"
   runIterateFrameHero()
   enemyBox.src = ''
   // make enemybox iron gate?
-  removeChoices()
   presentBranch1 = branchMergeTryGate
   presentBranch2 = branchMergeApproachFigure
   addChoices()
@@ -462,7 +472,6 @@ function skullDeadMoveOn (){
 
 // You are dead screen function (leads to gameover or branchStart)
 function youAreDead(){
-  // add stop functions for all possible music tracks here
   deadMusic.volume = 0.1
   deadMusic.play()
   winLoseMessage.innerText = `YOU LOSE`
@@ -483,7 +492,6 @@ function youAreDead(){
 
 // You win screen for player (leads to gameover or branchStart)
 function youWin(){
-  // add stop functions for all possible music tracks here
   winMusic.volume = 0.1
   winMusic.play()
   enemyBox.src = ''
@@ -512,6 +520,7 @@ function gameOver(){
   removeChoices()
   hideButtons()
   winLoseMessage.setAttribute('hidden', true)
+  backGround.src = ''
   //set background black
   enemyBox.setAttribute('hidden', true)
   enemyOrItemBox.setAttribute('hidden', true)
