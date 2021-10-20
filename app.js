@@ -40,7 +40,7 @@ let wizardDeathFrames = ['../images/wizard-death/death0.png', '../images/wizard-
 
 let wizardAttackFrames = ['../images/wizard-attack/Attack1.png', '../images/wizard-attack/Attack2.png', '../images/wizard-attack/Attack3.png', '../images/wizard-attack/Attack4.png', '../images/wizard-attack/Attack5.png', '../images/wizard-attack/Attack6.png', '../images/wizard-attack/Attack7.png', '../images/wizard-attack/Attack8.png']
 
-let heroDeathFrames = ['../images/hero-death/herodeath1.png', '../images/hero-death/herodeath2.png', '../images/hero-death/herodeath3.png', '../images/hero-death/herodeath4.png', '../images/hero-death/herodeath5.png', '../images/hero-death/herodeath6.png', '../images/hero-death/herodeath7.png', '../images/hero-death/herodeath8.png', '../images/hero-death/herodeath9.png', '../images/hero-death/herodeath10final.png']
+let heroDeathFrames = ['../images/hero-death/herodeath1.png', '../images/hero-death/herodeath2.png', '../images/hero-death/herodeath3.png', '../images/hero-death/herodeath4.png', '../images/hero-death/herodeath5.png', '../images/hero-death/herodeath6.png', '../images/hero-death/herodeath7.png', '../images/hero-death/herodeath8.png', '../images/hero-death/herodeath9.png', '../images/hero-death/herodeath10.png']
 
 let heroAttackFrames = ['../images/hero-attack/hkattack1.png', '../images/hero-attack/hkattack2.png', '../images/hero-attack/hkattack3.png', '../images/hero-attack/hkattack4.png', '../images/hero-attack/hkattack5.png', '../images/hero-attack/hkattack6.png', '../images/hero-attack/hkattack7.png', '../images/hero-attack/hkattack8.png']
 
@@ -93,7 +93,18 @@ choice2Btn.setAttribute('hidden', true)
 function attackIterateFrameDemon() {
   let frame = 0
   let frameIterator = setInterval(function() {
-    playerStatusImg.src = demonAttackFrames[frame]
+    enemyBox.src = demonAttackFrames[frame]
+    frame++
+    if (frame === 11){
+      clearInterval(frameIterator)
+      enemyBox.src = '../images/demon-idle.gif'
+    }
+  }, 200);
+}
+function attackIterateFrameDemonBox2() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    enemyBox.src = demonAttackFrames[frame]
     frame++
     if (frame === 11){
       clearInterval(frameIterator)
@@ -110,7 +121,7 @@ function attackIterateFrameSkull() {
       clearInterval(frameIterator)
       enemyBox.src = '../images/fire-skull.gif'
     }
-  }, 150);
+  }, 200);
 }
 function deathIterateFrameWizard() {
   let frame = 0
@@ -131,7 +142,7 @@ function attackIterateFrameWizard() {
       clearInterval(frameIterator)
       enemyBox.src = '../images/wizard-idle.gif'
     }
-  }, 250);
+  }, 200);
 }
 function deathIterateFrameHero() {
   let frame = 0
@@ -141,7 +152,7 @@ function deathIterateFrameHero() {
     if (frame === 10){
       clearInterval(frameIterator)
     }
-  }, 300);
+  }, 200);
 }
 function attackIterateFrameHero() {
   let frame = 0
@@ -370,8 +381,8 @@ function chargeWizard(){
   dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
   hideButtons()
   runIterateFrameHero()
-  setTimeout(attackIterateFrameWizard, 100)
-  setTimeout(deathIterateFrameHero, 200)
+  setTimeout(attackIterateFrameWizard, 200)
+  setTimeout(deathIterateFrameHero, 400)
   setTimeout(youAreDead, 8000)
   setTimeout(graveMusicStop, 7999)
 }
@@ -382,8 +393,8 @@ function findCover(){
   //add ghost enter/idle
   rollIterateFrameHero()
   // add gravestone here in front of hero
-  setTimeout(attackIterateFrameDemon, 100)
-  setTimeout(deathIterateFrameWizard, 200)
+  setTimeout(attackIterateFrameDemonBox2, 200)
+  setTimeout(deathIterateFrameWizard, 400)
   removeChoices()
   presentBranch1 = runToChurch
   presentBranch2 = keepHiding
@@ -396,7 +407,7 @@ function keepHiding(){
   dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
   hideButtons()
   attackIterateFrameDemon()
-  setTimeout(deathIterateFrameHero, 150)
+  setTimeout(deathIterateFrameHero, 200)
   setTimeout(youAreDead, 8000)
   setTimeout(graveMusicStop, 7999)
 }
@@ -410,6 +421,8 @@ function runToChurch(){
   hideButtons()
   runIterateFrameHero()
   enemyBox.src = ''
+  enemyBox.setAttribute('hidden', true)
+  enemyOrItemBox.src = ''
   // change enemyBox to chest?? ^^^
   setTimeout(youWin, 10000)
   setTimeout(graveMusicStop, 9999)
@@ -435,8 +448,8 @@ function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
   hideButtons()
   rollIterateFrameHero()
-  setTimeout(attackIterateFrameSkull, 150)
-  setTimeout(deathIterateFrameHero, 200)
+  setTimeout(attackIterateFrameDemonBox2, 200)
+  setTimeout(deathIterateFrameHero, 400)
   setTimeout(youAreDead, 8000)
   setTimeout(backgroundMusicStop, 7999)
 }
@@ -446,7 +459,7 @@ function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
   removeChoices()
   runIterateFrameHero()
-  setTimeout(attackIterateFrameHero, 150)
+  setTimeout(attackIterateFrameHero, 200)
   //add skull death vvvvv
   enemyBox.src = '../images/fire-skull-no-fire.gif'
   itemSilverKey = (true)
