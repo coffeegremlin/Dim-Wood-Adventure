@@ -43,6 +43,8 @@ function winMusicStop(){
 // Frame library in arrays vvv
 let demonAttackFrames = ['../images/demon-attack/da1.png', '../images/demon-attack/da2.png', '../images/demon-attack/da3.png', '../images/demon-attack/da4.png', '../images/demon-attack/da5.png', '../images/demon-attack/da6.png', '../images/demon-attack/da7.png', '../images/demon-attack/da8.png', '../images/demon-attack/da9.png', '../images/demon-attack/da10.png', '../images/demon-attack/da11.png']
 
+let ghostDeathFrames = ['../images/ghost-death/gv1.png', '../images/ghost-death/gv2.png', '../images/ghost-death/gv3.png', '../images/ghost-death/gv4.png', '../images/ghost-death/gv5.png', '../images/ghost-death/gv6.png', '../images/ghost-death/gv7.png', ]
+
 let skullAttackFrames = ['../images/skull-attack/skull1.png', '../images/skull-attack/skull2.png', '../images/skull-attack/fire1.png', '../images/skull-attack/fire2.png', '../images/skull-attack/fire3.png', '../images/skull-attack/fire4.png', '../images/skull-attack/fire5.png']
 
 let wizardDeathFrames = ['../images/wizard-death/death0.png', '../images/wizard-death/death1.png', '../images/wizard-death/death2.png', '../images/wizard-death/death3.png', '../images/wizard-death/death4.png', '../images/wizard-death/death5.png', '../images/wizard-death/death6.png', ]
@@ -118,6 +120,17 @@ function attackIterateFrameDemonBox2() {
     if (frame === 11){
       clearInterval(frameIterator)
       enemyBox.src = '../images/demon-idle.gif'
+    }
+  }, 200);
+}
+function deathIterateFrameGhost() {
+  let frame = 0
+  let frameIterator = setInterval(function() {
+    enemyBox.src = ghostDeathFrames[frame]
+    frame++
+    if (frame === 8){
+      clearInterval(frameIterator)
+      enemyBox.src = ' '
     }
   }, 200);
 }
@@ -345,7 +358,7 @@ function enterChurch(){
   backGround.src = "../images/backgrounds/church-interior-background.png"
   runIterateFrameHero()
   enemyBox.removeAttribute('hidden', true)
-  
+  enemyBox.src = '../images/ghost-idle.gif'
   // add ghost src
   removeChoices()
   presentBranch1 = attackGhost
@@ -359,7 +372,6 @@ function attackGhost(){
   dialog.innerText = `You swing your sword at the ghost, and it passes right through the form of the specter. It finds your advance very rude, and returns the favor in kind. You feel it get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
   hideButtons()
   attackIterateFrameHero()
-  // add ghost attack
   // add if/else statement to possibly slice through ghost
   setTimeout(attackIterateFrameDemon, 600)
   setTimeout(deathIterateFrameHero, 1200)
@@ -371,7 +383,8 @@ function attackGhost(){
 // Need to add a set timeout for this dialog to display before returning to youWin
 function lookForItem(){
   dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
-  // add ghost death
+  deathIterateFrameGhost()
+  enemyBox.setAttribute('hidden', true)
   // enemyBox.setAttribute('hidden'), true
   hideButtons()
   setTimeout(youWin, 10000)
@@ -474,6 +487,7 @@ function branch1IgnoreSkull(){
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
+  hideButtons()
   inventory.removeAttribute('hidden', true)
   removeChoices()
   runIterateFrameHero()
@@ -486,6 +500,7 @@ function branch1AttackSkull(){
 }
 
 function skullDeadMoveOn (){
+  revealButtons()
   backgroundMusicStop()
   graveyardMusic.volume = 0.1
   graveyardMusic.play()
