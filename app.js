@@ -1,5 +1,14 @@
 /*----------------- Constants -----------------*/
 
+function timeZone(){
+  let hour = (new Date).getHours()
+  if (hour >= 17){
+    // set dark mode
+  } else if (hour < 17){
+    //set light mode
+  }
+  console.log('user time is ' + hour)
+}
 // Music imports and functions for pausing vvv
 const backgroundMusic =  new Audio('../audio/arrival-to-carcosa.mp3')
 const startMusic = new Audio('../audio/Twilight.mp3')
@@ -247,6 +256,7 @@ function startGame(){
   inventory.setAttribute('hidden', true)
   startBtn.removeEventListener('click', startGame)
   startBtn.setAttribute('hidden', true)
+  timeZone()
   revealButtons()
   branchStart()
   console.log('startGame ran')
