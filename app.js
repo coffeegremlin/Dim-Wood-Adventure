@@ -480,6 +480,7 @@ function branch1AttackSkull(){
   setTimeout(attackIterateFrameHero, 200)
   //add skull death vvvvv
   enemyBox.src = '../images/fire-skull-no-fire.gif'
+  inventory.src = '../images/keyresize.png'
   itemSilverKey = (true)
   setTimeout(skullDeadMoveOn, 8000)
 }
