@@ -1,5 +1,13 @@
 /*----------------- Constants -----------------*/
 
+const backgroundMusic =  new Audio('../audio/arrival-to-carcosa.mp3')
+const startMusic = new Audio('../audio/Twilight.mp3')
+const graveyardYardMusic = new Audio('../audio/horror-piano.mp3')
+const churchMusic = new Audio('../audio/return-to-the-nightmare.mp3')
+const deadMusic = new Audio('../audio/reaching-the-event-horizon.mp3')
+const winMusic = new Audio('../audio/Extinction.mp3')
+const gameOverMusic = new Audio('../audio/they-will-be-here-any-minute.mp3')
+
 let demonAttackFrames = ['../images/demon-attack/da1.png', '../images/demon-attack/da2.png', '../images/demon-attack/da3.png', '../images/demon-attack/da4.png', '../images/demon-attack/da5.png', '../images/demon-attack/da6.png', '../images/demon-attack/da7.png', '../images/demon-attack/da8.png', '../images/demon-attack/da9.png', '../images/demon-attack/da10.png', '../images/demon-attack/da11.png']
 
 let skullAttackFrames = ['../images/skull-attack/skull1.png', '../images/skull-attack/skull2.png', '../images/skull-attack/fire1.png', '../images/skull-attack/fire2.png', '../images/skull-attack/fire3.png', '../images/skull-attack/fire4.png', '../images/skull-attack/fire5.png']
@@ -80,7 +88,7 @@ function attackIterateFrameSkull() {
       clearInterval(frameIterator)
       enemyBox.src = '../images/fire-skull.gif'
     }
-  }, 100);
+  }, 150);
 }
 function deathIterateFrameWizard() {
   let frame = 0
@@ -110,7 +118,6 @@ function deathIterateFrameHero() {
     frame++
     if (frame === 10){
       clearInterval(frameIterator)
-      // if the final death is not displayed, set src here to final frame
     }
   }, 300);
 }
@@ -132,6 +139,7 @@ function rollIterateFrameHero() {
     frame++
     if (frame === 9){
       clearInterval(frameIterator)
+      playerStatusImg.src = '../images/hero-roll/hkr9.png'
     }
   }, 200);
 }
@@ -181,10 +189,13 @@ function revealButtons(){
 }
 
 
-
 // Game functionality for looping/starting vvv
 
+
 function tryAgain(){
+  // startMusic.volume = 0.1
+  // startMusic.play
+  backgroundMusic
   removeChoices()
   backGround.setAttribute('hidden', true)
   enemyBox.setAttribute('hidden', true)
@@ -209,11 +220,13 @@ function startGame(){
 }
 
 
-
 // Story branch functions for game vvv
 
 // first choice for player
 function branchStart(){
+  backgroundMusic.volume = 0.1
+  backgroundMusic.play()
+  // figure out how to loop music
   dialog.innerText = `You’ve ventured into the forest of Dim Wood in search of reaching hidden treasure. As you stand before the trees, you see two paths lie in front of you. Choice 1: A dark opening in the trees that has no sound. Choice 2: A faint light dances down a dark path with soft laughter.`
   playerStatusImg.removeAttribute('hidden', true)
   playerStatusImg.src = '../images/hero-idle.gif'
@@ -248,6 +261,8 @@ function branch2Walkback(){
 
 // Player decides to press on through the dark
 function branch2PressOn(){
+  graveyardYardMusic.volume = 0.1
+  graveyardYardMusic.play()
   dialog.innerText = `You decide to press on further, hoping your eyes might adjust. The forest can only get so dark, it must eventually get lighter. It turns out that was a wise decision. Your optimism pays off as you press forward, and see the a path filled with lanterns leading you to a graveyard. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
   runIterateFrameHero()
   removeChoices()
@@ -276,6 +291,8 @@ function branchMergeTryGate(){
 
 // Choose church
 function enterChurch(){
+  churchMusic.volume = 0.1
+  churchMusic.play()
   dialog.innerText = `You decide whatever the cloaked figure is doing, if it’s in a graveyard it can’t be good. You walk to the church doors and heave them open. You see a ghost hovering in front of a gilded chest. Choice 1: Attack the ghost to get to the gilded chest. Choice 2: Silently look around for something to get rid of the ghost, and hope it doesn’t hear or see you moving about.`
   runIterateFrameHero()
   enemyBox.removeAttribute('hidden', true)
@@ -294,7 +311,7 @@ function attackGhost(){
   hideButtons()
   attackIterateFrameHero()
   // add ghost attack
-  deathIterateFrameHero()
+  setTimeout(deathIterateFrameHero, 100)
   setTimeout(youAreDead, 10000);
 }
 
@@ -323,8 +340,8 @@ function chargeWizard(){
   dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
   hideButtons()
   runIterateFrameHero()
-  attackIterateFrameWizard()
-  deathIterateFrameHero()
+  setTimeout(attackIterateFrameWizard, 100)
+  setTimeout(deathIterateFrameHero, 200)
   setTimeout(youAreDead, 15000);
 }
 
@@ -334,8 +351,8 @@ function findCover(){
   //add ghost enter/idle
   rollIterateFrameHero()
   // add gravestone here in front of hero
-  //ghost attack goes here
-  deathIterateFrameWizard()
+  setTimeout(attackIterateFrameDemon, 100)
+  setTimeout(deathIterateFrameWizard, 200)
   removeChoices()
   presentBranch1 = runToChurch
   presentBranch2 = keepHiding
@@ -348,7 +365,7 @@ function keepHiding(){
   dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
   hideButtons()
   attackIterateFrameDemon()
-  deathIterateFrameHero()
+  setTimeout(deathIterateFrameHero, 150)
   setTimeout(youAreDead, 10000);
 }
 
@@ -359,6 +376,7 @@ function runToChurch(){
   hideButtons()
   runIterateFrameHero()
   enemyBox.src = ''
+  // change enemyBox to chest?? ^^^
   setTimeout(youWin, 15000);
 }
 
@@ -382,8 +400,8 @@ function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
   hideButtons()
   rollIterateFrameHero()
-  attackIterateFrameSkull()
-  deathIterateFrameHero()
+  setTimeout(attackIterateFrameSkull, 150)
+  setTimeout(deathIterateFrameHero, 200)
   setTimeout(youAreDead, 10000);
 }
 
@@ -391,7 +409,7 @@ function branch1IgnoreSkull(){
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
   runIterateFrameHero()
-  attackIterateFrameHero()
+  setTimeout(attackIterateFrameHero, 150)
   //add skull death vvvvv
   enemyBox.src = '../images/fire-skull-no-fire.gif'
   itemSilverKey = (true)
@@ -399,9 +417,12 @@ function branch1AttackSkull(){
 }
 
 function skullDeadMoveOn (){
+  graveyardYardMusic.volume = 0.1
+  graveyardYardMusic.play()
   dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
   runIterateFrameHero()
   enemyBox.src = ''
+  // make enemybox iron gate?
   removeChoices()
   presentBranch1 = branchMergeTryGate
   presentBranch2 = branchMergeApproachFigure
@@ -409,11 +430,12 @@ function skullDeadMoveOn (){
 }
 
 
-
 // END SCREEN FUNCTIONS
 
 // You are dead screen function (leads to gameover or branchStart)
 function youAreDead(){
+  deadMusic.volume = 0.1
+  deadMusic.play()
   winLoseMessage.innerText = `YOU LOSE`
 
   //set backround to fade to black
@@ -432,6 +454,8 @@ function youAreDead(){
 
 // You win screen for player (leads to gameover or branchStart)
 function youWin(){
+  winMusic.volume = 0.1
+  winMusic.play()
   enemyBox.src = ''
   //set backround to fade to black
   //add game over 10,9,8... countdown timer
