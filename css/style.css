@@ -35,6 +35,34 @@ button#start{
   color: white;
 }
 
+img#background{
+  
+}
+
+img#player-status{
+
+}
+
+img#enemy{
+
+}
+
+img#enemy2-or-item{
+
+}
+
+h4#dialog-box{
+
+}
+
+img#inventory{
+
+}
+button.choices{
+
+}
+
+/* add an @media only for mobile view */
 
 /* #display{
   width: 720px;
