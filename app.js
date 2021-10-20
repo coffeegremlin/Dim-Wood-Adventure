@@ -1,9 +1,13 @@
 /*----------------- Constants -----------------*/
 
+
+
 function timeZone(){
   let hour = (new Date).getHours()
   if (hour >= 17){
     // set dark mode
+    // bodyElement.style = backGroundColor(black)
+    //stye.backgroundColor = code
   } else if (hour < 17){
     //set light mode
   }
@@ -68,6 +72,8 @@ let totalChoices = []
 
 /*--------- Cached Element References ---------*/
 
+// const bodyElement = document.querySelector('body')
+
 const winLoseMessage = document.querySelector('#win-lose-message')
 const backGround = document.querySelector('#background')
 const enemyBox = document.querySelector('#enemy')
@@ -115,7 +121,7 @@ function attackIterateFrameDemon() {
 function attackIterateFrameDemonBox2() {
   let frame = 0
   let frameIterator = setInterval(function() {
-    enemyBox.src = demonAttackFrames[frame]
+    enemyBoxOrItem.src = demonAttackFrames[frame]
     frame++
     if (frame === 11){
       clearInterval(frameIterator)
@@ -419,6 +425,7 @@ function findCover(){
   dialog.innerText = `You take cover behind the closet gravestone as the wizard finishes his spell and aims it at you. The black oily flame bursts against the gravestone and you see it turn to snow. A ghost comes screaming out of the church above, throwing the iron gate wide open as its wail fills the sky. The wizard has angered the specter by attacking its final resting place. The ghost turns the wizard to a solid block of ice as you watch hidden behind the grave. Choice 1: Run for the church. Choice 2: You continue to keep hiding, and wait for the ghost to leave.`
   //add ghost enter/idle
   rollIterateFrameHero()
+  enemyOrItemBox.removeAttribute('hidden', true)
   // add gravestone here in front of hero
   setTimeout(attackIterateFrameDemonBox2, 200)
   setTimeout(deathIterateFrameWizard, 400)
