@@ -245,6 +245,8 @@ function tryAgain(){
 }
 
 function startGame(){
+  playerStatusImg.removeAttribute('hidden', true)
+  inventory.setAttribute('hidden', true)
   startBtn.removeEventListener('click', startGame)
   startBtn.setAttribute('hidden', true)
   revealButtons()
@@ -312,6 +314,7 @@ function branch2PressOn(){
 function branchMergeTryGate(){
   if (itemSilverKey === true){
     dialog.innerText = `You pull the silver key from you pocket and see it glow as you hold it to the gate’s lock. The key and the gate seem to shimmer into nothingness. Choice 1: Enter and explore the church. Choice 2: Approach the cloaked figure?`
+    inventory.setAttribute('hidden', true)
     removeChoices()
     presentBranch1 = enterChurch
     presentBranch2 = branchMergeApproachFigure
@@ -350,7 +353,8 @@ function attackGhost(){
   attackIterateFrameHero()
   // add ghost attack
   // add if/else statement to possibly slice through ghost
-  setTimeout(deathIterateFrameHero, 100)
+  setTimeout(attackIterateFrameDemon, 600)
+  setTimeout(deathIterateFrameHero, 1200)
   setTimeout(youAreDead, 8000)
   setTimeout(churchMusicStop, 7999)
 }
@@ -381,8 +385,8 @@ function chargeWizard(){
   dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
   hideButtons()
   runIterateFrameHero()
-  setTimeout(attackIterateFrameWizard, 200)
-  setTimeout(deathIterateFrameHero, 400)
+  setTimeout(attackIterateFrameWizard, 400)
+  setTimeout(deathIterateFrameHero, 600)
   setTimeout(youAreDead, 8000)
   setTimeout(graveMusicStop, 7999)
 }
@@ -448,8 +452,8 @@ function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
   hideButtons()
   rollIterateFrameHero()
-  setTimeout(attackIterateFrameDemonBox2, 200)
-  setTimeout(deathIterateFrameHero, 400)
+  setTimeout(attackIterateFrameSkull, 200)
+  setTimeout(deathIterateFrameHero, 600)
   setTimeout(youAreDead, 8000)
   setTimeout(backgroundMusicStop, 7999)
 }
@@ -457,6 +461,7 @@ function branch1IgnoreSkull(){
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
   dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
+  inventory.removeAttribute('hidden', true)
   removeChoices()
   runIterateFrameHero()
   setTimeout(attackIterateFrameHero, 200)
@@ -474,6 +479,7 @@ function skullDeadMoveOn (){
   backGround.src = "../images/backgrounds/graveyard-background.png"
   runIterateFrameHero()
   enemyBox.src = ''
+  enemyBox.setAttribute ('hidden', true)
   // make enemybox iron gate?
   presentBranch1 = branchMergeTryGate
   presentBranch2 = branchMergeApproachFigure
