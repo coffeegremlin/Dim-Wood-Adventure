@@ -456,6 +456,8 @@ function runToChurch(){
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
   enemyBox.src = ''
   enemyBox.setAttribute('hidden', true)
+  enemyOrItemBox.src = ''
+  enemyOrItemBox.setAttribute('hidden', true)
   backGround.src = "../images/backgrounds/church-interior-background.png"
   removeChoices()
   hideButtons()
