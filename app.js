@@ -1,17 +1,6 @@
 /*----------------- Constants -----------------*/
-function timeZone(){
-  let hour = (new Date).getHours()
-  if (hour >= 17){
-    // set dark mode
-    // set class="p-3 mb-2 bg-dark text-white"
-    // bodyElement.style = backGroundColor(black)
-    //stye.backgroundColor = code
-  } else if (hour < 17){
-    //set light mode
-    // class="p-3 mb-2 bg-light text-dark"
-  }
-  console.log('user time is ' + hour)
-}
+
+
 // Music imports and functions for pausing vvv
 const backgroundMusic =  new Audio('../audio/arrival-to-carcosa.mp3')
 const startMusic = new Audio('../audio/Twilight.mp3')
@@ -72,6 +61,7 @@ let totalChoices = []
 /*--------- Cached Element References ---------*/
 
 const bodyElement = document.querySelector('body')
+const shortIcon = document.querySelector('#short-icon')
 
 const winLoseMessage = document.querySelector('#win-lose-message')
 const backGround = document.querySelector('#background')
@@ -103,6 +93,19 @@ choice2Btn.setAttribute('hidden', true)
     // Also animate/run gif of enemy status(on top of background box on the right.)
 //At the end, add amount of button clicks or a value of how many choices the player made by using the const totalChoices.
 
+// Light/dark mode
+function timeZone(){
+  let hour = (new Date).getHours()
+  if (hour >= 17){
+    // set dark mode
+    shortIcon.href = '../images/moon.png'
+    bodyElement.style = 'background-color: black'
+  } else if (hour < 17){
+    shortIcon.href = '../images/sun.png'
+    bodyElement.style = 'background-color: darkgrey'
+  }
+  console.log('user time is ' + hour)
+}
 
 // Animations by set timeout vvv
 

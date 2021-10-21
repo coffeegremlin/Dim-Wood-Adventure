@@ -15,6 +15,10 @@ Launch the game: https://dimwoodadventure.netlify.app/
 
 * Key icon from: https://stealthix.itch.io/rpg-icon-pack-16-x-16
 
+* Moon icon from: www.flaticon.com
+
+* Sun icon from: www.flaticon.com
+
 * Bootstrap: https://getbootstrap.com/
 
 * AnimateCSS: https://animate.style/
