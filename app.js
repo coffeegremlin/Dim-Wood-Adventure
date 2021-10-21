@@ -1,7 +1,4 @@
 /*----------------- Constants -----------------*/
-
-
-
 function timeZone(){
   let hour = (new Date).getHours()
   if (hour >= 17){

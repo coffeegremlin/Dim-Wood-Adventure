@@ -44,6 +44,8 @@ button#start{
   bottom: 45%;
 }
 
+
+
 img#enemy{
   position: absolute;
   z-index: 10;
