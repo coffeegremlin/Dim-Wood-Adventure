@@ -103,6 +103,7 @@ const playerStatusImg = document.querySelector('#player-status')
 /*-------------- Event Listeners --------------*/
 
 startBtn.addEventListener('click', startGame)
+dialog.setAttribute('hidden', true)
 choice1Btn.setAttribute('hidden', true)
 choice2Btn.setAttribute('hidden', true)
 
@@ -314,6 +315,7 @@ function startGame(){
   hideInventory()
   startBtn.removeEventListener('click', startGame)
   startBtn.setAttribute('hidden', true)
+  dialog.removeAttribute('hidden', true)
   revealButtons()
   branchStart()
 }
