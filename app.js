@@ -94,6 +94,7 @@ choice2Btn.setAttribute('hidden', true)
 //At the end, add amount of button clicks or a value of how many choices the player made by using the const totalChoices.
 
 // Light/dark mode
+timeZone()
 function timeZone(){
   let hour = (new Date).getHours()
   if (hour >= 17){
@@ -278,7 +279,6 @@ function startGame(){
   inventory.setAttribute('hidden', true)
   startBtn.removeEventListener('click', startGame)
   startBtn.setAttribute('hidden', true)
-  timeZone()
   revealButtons()
   branchStart()
   console.log('startGame ran')
