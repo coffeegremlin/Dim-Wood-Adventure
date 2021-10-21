@@ -30,6 +30,31 @@ function winMusicStop(){
   winMusic.currentTime = 0
 }
 
+function backgroundMusicPlay(){
+  backgroundMusic.volume = 0.1
+  backgroundMusic.play()
+}
+function graveMusicPlay(){
+  graveyardMusic.volume = 0.1
+  graveyardMusic.play()
+}
+function churchMusicPlay(){
+  churchMusic.volume = 0.1
+  churchMusic.play()
+}
+function deadMusicPlay(){
+  deadMusic.volume = 0.1
+  deadMusic.play()
+}
+function winMusicPlay(){
+  winMusic.volume = 0.1
+  winMusic.play()
+}
+function gameOverMusicPlay(){
+  gameOverMusic.volume = 0.1
+  gameOverMusic.play()
+}
+
 // Frame library in arrays vvv
 let demonAttackFrames = ['../images/demon-attack/da1.png', '../images/demon-attack/da2.png', '../images/demon-attack/da3.png', '../images/demon-attack/da4.png', '../images/demon-attack/da5.png', '../images/demon-attack/da6.png', '../images/demon-attack/da7.png', '../images/demon-attack/da8.png', '../images/demon-attack/da9.png', '../images/demon-attack/da10.png', '../images/demon-attack/da11.png']
 
@@ -90,10 +115,10 @@ function timeZone(){
   if (hour >= 17){
     // set dark mode
     shortIcon.href = '../images/moon.png'
-    bodyElement.style = 'background-color: black'
+    bodyElement.style = 'background-image: linear-gradient(to bottom, #555555, #404040, #2c2c2c, #1a1a1a, #000000);'
   } else if (hour < 17){
     shortIcon.href = '../images/sun.png'
-    bodyElement.style = 'background-color: darkgrey'
+    bodyElement.style = 'background-image: linear-gradient(to top, #999999, #a9a9a9, #bababa, #cbcbcb, #dcdcdc);'
   }
   console.log('user time is ' + hour)
 }
@@ -242,6 +267,9 @@ function hideBackground(){
 function hideEnemy2(){
   enemyOrItemBox.setAttribute('hidden', true)
 }
+function hideInventory(){
+  inventory.setAttribute('hidden', true)
+}
 
 function revealButtons(){
   choice1Btn.removeAttribute('hidden', true)
@@ -259,7 +287,9 @@ function revealBackground(){
 function revealEnemy2(){
   enemyOrItemBox.removeAttribute('hidden', true)
 }
-
+function revealInventory(){
+  inventory.removeAttribute('hidden', true)
+}
 
 // Game functionality for looping/starting vvv
 function tryAgain(){
@@ -275,12 +305,13 @@ function tryAgain(){
   hideButtons()
   dialog.innerText = '...'
   winLoseMessage.setAttribute('hidden', true)
+  hideInventory()
   itemSilverKey = (null)
   startGame()
 }
 function startGame(){
   revealPlayer()
-  inventory.setAttribute('hidden', true)
+  hideInventory()
   startBtn.removeEventListener('click', startGame)
   startBtn.setAttribute('hidden', true)
   revealButtons()
@@ -289,8 +320,7 @@ function startGame(){
 
 // Story branch functions for game vvv
 function branchStart(){
-  backgroundMusic.volume = 0.1
-  backgroundMusic.play()
+  backgroundMusicPlay()
   dialog.innerText = `You’ve ventured into the forest of Dim Wood in search of reaching hidden treasure. As you stand before the trees, you see two paths lie in front of you. Choice 1: A dark opening in the trees that has no sound. Choice 2: A faint light dances down a dark path with soft laughter.`
   playerStatusImg.src = '../images/hero-idle.gif'
   revealPlayer()
@@ -320,8 +350,7 @@ function branch2Walkback(){
 
 function branch2PressOn(){
   backgroundMusicStop()
-  graveyardMusic.volume = 0.1
-  graveyardMusic.play()
+  graveMusicPlay()
   dialog.innerText = `You decide to press on further, hoping your eyes might adjust. The forest can only get so dark, it must eventually get lighter. It turns out that was a wise decision. Your optimism pays off as you press forward, and see the a path filled with lanterns leading you to a graveyard. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
   backGround.src = "../images/backgrounds/graveyard-background.png"
   runIterateFrameHero()
@@ -334,7 +363,7 @@ function branch2PressOn(){
 function branchMergeTryGate(){
   if (itemSilverKey === true){
     dialog.innerText = `You pull the silver key from you pocket and see it glow as you hold it to the gate’s lock. The key and the gate seem to shimmer into nothingness. Choice 1: Enter and explore the church. Choice 2: Approach the cloaked figure?`
-    inventory.setAttribute('hidden', true)
+    hideInventory()
     removeChoices()
     presentBranch1 = enterChurch
     presentBranch2 = branchMergeApproachFigure
@@ -350,8 +379,7 @@ function branchMergeTryGate(){
 
 function enterChurch(){
   graveMusicStop()
-  churchMusic.volume = 0.1
-  churchMusic.play()
+  churchMusicPlay()
   dialog.innerText = `You decide whatever the cloaked figure is doing, if it’s in a graveyard it can’t be good. You walk to the church doors and heave them open. You see a ghost hovering in front of a gilded chest. Choice 1: Attack the ghost to get to the gilded chest. Choice 2: Silently look around for something to get rid of the ghost, and hope it doesn’t hear or see you moving about.`
   backGround.src = "../images/backgrounds/church-interior-background.png"
   runIterateFrameHero()
@@ -428,8 +456,7 @@ function keepHiding(){
 
 function runToChurch(){
   graveMusicStop()
-  churchMusic.volume = 0.1
-  churchMusic.play()
+  churchMusicPlay()
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
   hideEnemy()
   enemyBox.src = ''
@@ -458,8 +485,8 @@ function branch1IgnoreSkull(){
   dialog.innerText = `You try to slip away to a side path but step on a branch. The skull hears the snap of the fallen branches. It turns and sees you trying to slink away into the darkness of the wood. The skull rushes you, breathing hellfire over you. The flames envelope you in a horrible burning embrace. You are dead.`
   hideButtons()
   rollIterateFrameHero()
-  setTimeout(attackIterateFrameSkull, 200)
-  setTimeout(deathIterateFrameHero, 600)
+  setTimeout(attackIterateFrameSkull, 600)
+  setTimeout(deathIterateFrameHero, 1200)
   setTimeout(youAreDead, 8000)
   setTimeout(backgroundMusicStop, 7999)
 }
@@ -470,18 +497,17 @@ function branch1AttackSkull(){
   removeChoices()
   runIterateFrameHero()
   setTimeout(attackIterateFrameHero, 200)
-  setTimeout(hideEnemy, 600)
+  setTimeout(hideEnemy, 1000)
   inventory.src = '../images/keyresize.png'
   itemSilverKey = (true)
-  inventory.removeAttribute('hidden', true)
+  revealInventory()
   setTimeout(skullDeadMoveOn, 8000)
 }
 
 function skullDeadMoveOn (){
   revealButtons()
   backgroundMusicStop()
-  graveyardMusic.volume = 0.1
-  graveyardMusic.play()
+  graveMusicPlay()
   dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
   backGround.src = "../images/backgrounds/graveyard-background.png"
   runIterateFrameHero()
@@ -495,8 +521,7 @@ function skullDeadMoveOn (){
 
 // END SCREEN FUNCTIONS
 function youAreDead(){
-  deadMusic.volume = 0.1
-  deadMusic.play()
+  deadMusicPlay()
   winLoseMessage.innerText = `YOU LOSE`
   //set backround to fade to black
   //add game over 10,9,8... countdown timer
@@ -513,8 +538,7 @@ function youAreDead(){
 }
 
 function youWin(){
-  winMusic.volume = 0.1
-  winMusic.play()
+  winMusicPlay()
   hideEnemy()
   enemyBox.src = ''
   hideBackground()
@@ -533,8 +557,7 @@ function youWin(){
 function gameOver(){
   deadMusicStop()
   winMusicStop()
-  gameOverMusic.volume = 0.1
-  gameOverMusic.play()
+  gameOverMusicPlay()
   dialog.innerText = `GAME OVER. THANK YOU FOR PLAYING.`
   removeChoices()
   hideButtons()
@@ -543,6 +566,6 @@ function gameOver(){
   backGround.src = ''
   hideEnemy()
   hideEnemy2()
-  inventory.setAttribute('hidden', true)
+  hideInventory()
   hidePlayer()
 }
