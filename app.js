@@ -35,7 +35,7 @@ function winMusicStop(){
 // Frame library in arrays vvv
 let demonAttackFrames = ['../images/demon-attack/da1.png', '../images/demon-attack/da2.png', '../images/demon-attack/da3.png', '../images/demon-attack/da4.png', '../images/demon-attack/da5.png', '../images/demon-attack/da6.png', '../images/demon-attack/da7.png', '../images/demon-attack/da8.png', '../images/demon-attack/da9.png', '../images/demon-attack/da10.png', '../images/demon-attack/da11.png']
 
-let ghostDeathFrames = ['../images/ghost-death/gv1.png', '../images/ghost-death/gv2.png', '../images/ghost-death/gv3.png', '../images/ghost-death/gv4.png', '../images/ghost-death/gv5.png', '../images/ghost-death/gv6.png', '../images/ghost-death/gv7.png', ]
+let ghostDeathFrames = ['../images/ghost-death/gv1.png', '../images/ghost-death/gv2.png', '../images/ghost-death/gv3.png', '../images/ghost-death/gv4.png', '../images/ghost-death/gv5.png', '../images/ghost-death/gv6.png', '../images/ghost-death/gv7.png']
 
 let skullAttackFrames = ['../images/skull-attack/skull1.png', '../images/skull-attack/skull2.png', '../images/skull-attack/fire1.png', '../images/skull-attack/fire2.png', '../images/skull-attack/fire3.png', '../images/skull-attack/fire4.png', '../images/skull-attack/fire5.png']
 
@@ -137,9 +137,10 @@ function deathIterateFrameGhost() {
   let frameIterator = setInterval(function() {
     enemyBox.src = ghostDeathFrames[frame]
     frame++
-    if (frame === 8){
+    if (frame === 7){
       clearInterval(frameIterator)
       enemyBox.src = ' '
+      enemyBox.setAttribute('hidden', true)
     }
   }, 200);
 }
@@ -392,8 +393,8 @@ function attackGhost(){
 // Need to add a set timeout for this dialog to display before returning to youWin
 function lookForItem(){
   dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
-  deathIterateFrameGhost()
-  enemyBox.setAttribute('hidden', true)
+  attackIterateFrameHero()
+  setTimeout(deathIterateFrameGhost, 600)
   // enemyBox.setAttribute('hidden'), true
   hideButtons()
   setTimeout(youWin, 10000)
@@ -414,7 +415,7 @@ function branchMergeApproachFigure(){
 // Charge the wizard (leads to youAreDead)
 // Need to add a set timeout for this dialog to display before returning to youAreDead
 function chargeWizard(){
-  dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming skeleton of black oily fire. The skeleton charges you and explodes over you, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
+  dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming cloud of black oily fire. The cloud rushes towards you and explodes, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
   hideButtons()
   runIterateFrameHero()
   setTimeout(attackIterateFrameWizard, 400)
@@ -476,7 +477,7 @@ function runToChurch(){
 
 // Investigate the light/laughter branch
 function branch1Skull(){
-  dialog.innerText = `As you walk down the path, deciding to investigate what the light is, you see it turns out to be a flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the skull, hoping you might catch it by surprise.`
+  dialog.innerText = `As you walk down the path, deciding to investigate what the light is, you see it turns out to be a giant flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the giant skull, hoping you might catch it by surprise.`
   enemyBox.removeAttribute('hidden', true)
   enemyBox.src = '../images/fire-skull.gif'
   removeChoices()
@@ -499,7 +500,7 @@ function branch1IgnoreSkull(){
 
 // Attack the skull (needs to have html injection to give player the silver key === true), and merge branch1 to branchMergeTryGate // branchMergeApproachFigure.
 function branch1AttackSkull(){
-  dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with a mighty swing. You see something shining inside one of the halves of the split skull. You found a silver key!`
+  dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with an unbelievably mighty swing. Truly a heroic feat! You see something shining inside one of the halves of the split skull. You found a silver key!`
   hideButtons()
   inventory.removeAttribute('hidden', true)
   removeChoices()
