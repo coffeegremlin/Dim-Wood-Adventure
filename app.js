@@ -3,10 +3,12 @@ function timeZone(){
   let hour = (new Date).getHours()
   if (hour >= 17){
     // set dark mode
+    // set class="p-3 mb-2 bg-dark text-white"
     // bodyElement.style = backGroundColor(black)
     //stye.backgroundColor = code
   } else if (hour < 17){
     //set light mode
+    // class="p-3 mb-2 bg-light text-dark"
   }
   console.log('user time is ' + hour)
 }
@@ -69,7 +71,7 @@ let totalChoices = []
 
 /*--------- Cached Element References ---------*/
 
-// const bodyElement = document.querySelector('body')
+const bodyElement = document.querySelector('body')
 
 const winLoseMessage = document.querySelector('#win-lose-message')
 const backGround = document.querySelector('#background')
@@ -118,11 +120,11 @@ function attackIterateFrameDemon() {
 function attackIterateFrameDemonBox2() {
   let frame = 0
   let frameIterator = setInterval(function() {
-    enemyBoxOrItem.src = demonAttackFrames[frame]
+    enemyOrItemBox.src = demonAttackFrames[frame]
     frame++
     if (frame === 11){
       clearInterval(frameIterator)
-      enemyBox.src = '../images/demon-idle.gif'
+      enemyOrItemBox.src = '../images/demon-idle.gif'
     }
   }, 200);
 }
@@ -197,7 +199,7 @@ function rollIterateFrameHero() {
     frame++
     if (frame === 9){
       clearInterval(frameIterator)
-      playerStatusImg.src = '../images/hero-roll/hkr9.png'
+      playerStatusImg.src = '../images/hero-roll/hkr8.png'
     }
   }, 200);
 }
@@ -257,6 +259,7 @@ function tryAgain(){
   removeChoices()
   backGround.setAttribute('hidden', true)
   enemyBox.setAttribute('hidden', true)
+  enemyOrItemBox.setAttribute('hidden', true)
   playerStatusImg.setAttribute('hidden', true)
   startBtn.removeAttribute('hidden', true)
   hideButtons()
@@ -423,7 +426,7 @@ function findCover(){
   //add ghost enter/idle
   rollIterateFrameHero()
   enemyOrItemBox.removeAttribute('hidden', true)
-  // add gravestone here in front of hero
+  enemyOrItemBox.src = '../images/demon-idle.gif'
   setTimeout(attackIterateFrameDemonBox2, 200)
   setTimeout(deathIterateFrameWizard, 400)
   removeChoices()
@@ -437,7 +440,8 @@ function findCover(){
 function keepHiding(){
   dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
   hideButtons()
-  attackIterateFrameDemon()
+  // reset enemy box here
+  attackIterateFrameDemonBox2()
   setTimeout(deathIterateFrameHero, 200)
   setTimeout(youAreDead, 8000)
   setTimeout(graveMusicStop, 7999)
@@ -450,13 +454,13 @@ function runToChurch(){
   churchMusic.volume = 0.1
   churchMusic.play()
   dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
+  enemyBox.src = ''
+  enemyBox.setAttribute('hidden', true)
   backGround.src = "../images/backgrounds/church-interior-background.png"
   removeChoices()
   hideButtons()
   runIterateFrameHero()
-  enemyBox.src = ''
-  enemyBox.setAttribute('hidden', true)
-  enemyOrItemBox.src = ''
+  // enemyOrItemBox.src = ''
   // change enemyBox to chest?? ^^^
   setTimeout(youWin, 10000)
   setTimeout(churchMusicStop, 9999)
@@ -497,7 +501,7 @@ function branch1AttackSkull(){
   runIterateFrameHero()
   setTimeout(attackIterateFrameHero, 200)
   //add skull death vvvvv
-  enemyBox.src = '../images/fire-skull-no-fire.gif'
+  enemyBox.setAttribute('hidden', true)
   inventory.src = '../images/keyresize.png'
   itemSilverKey = (true)
   setTimeout(skullDeadMoveOn, 8000)
@@ -530,9 +534,10 @@ function youAreDead(){
 
   //set backround to fade to black
   //add game over 10,9,8... countdown timer
-
-  playerStatusImg.src = '../hero-death/herodeath10final.png'
-  enemyBox.src = ''
+  enemyOrItemBox.setAttribute('hidden', true)
+  backGround.setAttribute('hidden', true)
+  enemyBox.setAttribute('hidden', true)
+  playerStatusImg.src = '../images/hero-death/herodeath10.png'
   dialog.innerText = `YOU ARE DEAD. Choice 1: TRY AGAIN? Choice 2: NO.`
   removeChoices()
   presentBranch1 = tryAgain

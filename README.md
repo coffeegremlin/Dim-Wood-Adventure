@@ -12,3 +12,7 @@ Assets used:
 -Sprites animated from stills from: GothicVania
 
 -Key icon from: https://stealthix.itch.io/rpg-icon-pack-16-x-16
+
+Wireframes: 
+<img src ="../images/Flowchart.png">
+<img src ="../images/GUI.png">
