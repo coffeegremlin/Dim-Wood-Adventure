@@ -9,6 +9,7 @@ body{
   justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
 }
 
 section#game-board{
@@ -23,41 +24,50 @@ section#game-board{
   border-radius: 1%;
   background-color: black;
   color: white;
+  position: absolute;
+  z-index: 10;
 }
 
-button#start{
-  background-color:indigo;
-  color: white;
+#title{
+  position: absolute;
+  z-index: 30;
 }
 
 #background{
-  position: relative;
-  width: 800px ;
-  height:500px;
+  position: absolute;
+  z-index: 20;
+  top: 5%;
+  /* width: 80vh;
+  height: 60vh; */
 }
 
 #player-status{
   height: 140px;
   width: 220px;
   position: absolute;
-  z-index: 10;
-  bottom: 45%;
+  z-index: 30;
+  /* bottom: 45%; */
 }
 
 
 
 img#enemy{
   position: absolute;
-  z-index: 10;
-  bottom: 45%;
-  right: 38%;
+  z-index: 30;
+  /* bottom: 45%;
+  right: 38%; */
 }
 
 img#enemy2-or-item{
   position: absolute;
-  z-index: 10;
-  bottom: 50%;
-  right: 40%;
+  z-index: 30;
+  /* bottom: 50%;
+  right: 40%; */
+}
+
+button#start{
+  background-color:indigo;
+  color: white;
 }
 
 h4#dialog-box{
