@@ -25,6 +25,7 @@ Launch the game: https://dimwoodadventure.netlify.app/
 
 ### Wireframes: 
 <img src ="images/Flowchart.png">
+
 <img src ="images/GUI.png">
 
 ### Future Enhancements: 
@@ -32,3 +33,5 @@ Launch the game: https://dimwoodadventure.netlify.app/
 * Add new GUI to look more coherent
 * Change sprites to custom made
 * Add sound effects upon actions
+* Add win animations and more items
+* Add more story branches

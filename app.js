@@ -334,7 +334,7 @@ function branchStart(){
 }
 
 function branch2Dark(){
-  dialog.innerText = `Deciding the laughter can’t amount to anything good, you head down the dark path. It seems impossible but the forest’s darkness settles around you heavier with every step. Choice 1: You push forward hoping for the darkness to let up. Choice 2: Turn back around deciding the other path was a better choice.`
+  dialog.innerText = `Deciding that the laughter can’t amount to anything good, you head down the silent and dark path. It seems impossible, but the forest’s darkness settles around you heavier with every step. Choice 1: You push forward hoping for the darkness to let up. Choice 2: Turn back around deciding the other path was a better choice.`
   runIterateFrameHero()
   removeChoices()
   presentBranch1 = branch2PressOn
@@ -353,7 +353,7 @@ function branch2Walkback(){
 function branch2PressOn(){
   backgroundMusicStop()
   graveMusicPlay()
-  dialog.innerText = `You decide to press on further, hoping your eyes might adjust. The forest can only get so dark, it must eventually get lighter. It turns out that was a wise decision. Your optimism pays off as you press forward, and see the a path filled with lanterns leading you to a graveyard. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  dialog.innerText = `You decide to press on further, hoping your eyes might adjust. The forest can only get so dark, it must eventually get lighter. It turns out that was a wise decision. Your optimism pays off as you press forward, and see a path filled with lanterns leading you to a graveyard. Choice 1: On your right there’s a towering iron gate to the entrance of a church. Try to open the gate. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
   backGround.src = "../images/backgrounds/graveyard-background.png"
   runIterateFrameHero()
   removeChoices()
@@ -364,7 +364,7 @@ function branch2PressOn(){
 
 function branchMergeTryGate(){
   if (itemSilverKey === true){
-    dialog.innerText = `You pull the silver key from you pocket and see it glow as you hold it to the gate’s lock. The key and the gate seem to shimmer into nothingness. Choice 1: Enter and explore the church. Choice 2: Approach the cloaked figure?`
+    dialog.innerText = `You pull the silver key from your pocket and see it glow as you hold it to the gate’s lock. The key and the gate seem to shimmer into nothingness. Choice 1: Enter and explore the church. Choice 2: Approach the cloaked figure.`
     hideInventory()
     removeChoices()
     presentBranch1 = enterChurch
@@ -394,7 +394,7 @@ function enterChurch(){
 }
 
 function attackGhost(){
-  dialog.innerText = `You swing your sword at the ghost, and it passes right through the form of the specter. It finds your advance very rude, and returns the favor in kind. You feel it get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
+  dialog.innerText = `You swing your sword at the ghost, and it passes right through the form of the specter. It finds your advances very rude, and returns the favor in kind. You feel it get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
   hideButtons()
   attackIterateFrameHero()
   // add if/else statement to possibly slice through ghost
@@ -405,7 +405,7 @@ function attackGhost(){
 }
 
 function lookForItem(){
-  dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
+  dialog.innerText = `You find a bowl of what you hope is holy water, and throw it on the ghost. The ghost burns up in otherworldly blue flame. You now can open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now, or what things it may hold.`
   attackIterateFrameHero()
   setTimeout(deathIterateFrameGhost, 600)
   // enemyBox.setAttribute('hidden'), true
@@ -415,7 +415,7 @@ function lookForItem(){
 }
 
 function branchMergeApproachFigure(){
-  dialog.innerText = `You decide to approach the cloaked figure, and as you draw near, you see it’s a dark wizard with yellowed skin drawn taught against his sallow bones. The wizard begin to gather oily black light atop his staff. Choice 1: Charge the wizard, hoping to reach him before he finishes casting his spell. Choice 2: Find a grave stone to take cover behind.`
+  dialog.innerText = `You decide to approach the cloaked figure. As you draw near, you see the figure is a dark wizard with yellowed skin drawn taught against his sallow bones. The wizard begins to gather oily black light atop his staff. Choice 1: Charge the wizard, hoping to reach him before he finishes casting his spell. Choice 2: Find a grave stone to take cover behind.`
   enemyBox.src = '../images/wizard-idle.gif'
   revealEnemy()
   removeChoices()
@@ -425,7 +425,7 @@ function branchMergeApproachFigure(){
 }
 
 function chargeWizard(){
-  dialog.innerText = `You get within a few feet of the wizard as his oily flames explode into the shape of a looming cloud of black oily fire. The cloud rushes towards you and explodes, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches. You are Dead.`
+  dialog.innerText = `You get within a few feet of the wizard as his spell expands into the shape of a looming cloud of black oil slicked fire. The cloud rushes towards you and explodes, covering you in the dark oily flame. You burn to nothing but a handful of ashes as the wizard watches silently. You are Dead.`
   hideButtons()
   runIterateFrameHero()
   setTimeout(attackIterateFrameWizard, 400)
@@ -435,7 +435,7 @@ function chargeWizard(){
 }
 
 function findCover(){
-  dialog.innerText = `You take cover behind the closet gravestone as the wizard finishes his spell and aims it at you. The black oily flame bursts against the gravestone and you see it turn to snow. A ghost comes screaming out of the church above, throwing the iron gate wide open as its wail fills the sky. The wizard has angered the specter by attacking its final resting place. The ghost turns the wizard to a solid block of ice as you watch hidden behind the grave. Choice 1: Run for the church. Choice 2: You continue to keep hiding, and wait for the ghost to leave.`
+  dialog.innerText = `You take cover behind the closet gravestone as the wizard finishes his spell and aims it at you. The black oily flame bursts against the gravestone and you see it turn to nothingness. A ghost comes screaming out of the church above, throwing the iron gate wide open as its wail fills the sky. The wizard has angered the specter by attacking its final resting place. The ghost turns the wizard to a solid block of ice as you watch hidden behind the grave. Choice 1: Run for the church. Choice 2: You continue to keep hiding, and wait for the ghost to leave.`
   rollIterateFrameHero()
   enemyOrItemBox.src = '../images/demon-idle.gif'
   revealEnemy2()
@@ -448,7 +448,7 @@ function findCover(){
 }
 
 function keepHiding(){
-  dialog.innerText = `The ghost turn and sees you laying down behind it’s grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
+  dialog.innerText = `The ghost turns and sees you laying down behind its grave. The ghost doesn’t take kindly to your use of its final resting place as a shield. You feel yourself get very cold and your vision blurs as the ghost grabs your helmet. You are frozen in a block of ice. You are dead.`
   hideButtons()
   attackIterateFrameDemonBox2()
   setTimeout(deathIterateFrameHero, 200)
@@ -459,7 +459,7 @@ function keepHiding(){
 function runToChurch(){
   graveMusicStop()
   churchMusicPlay()
-  dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost.You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now what things it may hold.`
+  dialog.innerText = `You run for the church, not waiting to be the next victim of the ghost. You reach the church and enter, leaving the grisly scene behind. As you walk down the aisle, you see a gilded chest on an altar. You move to it and open the chest. Inside you find the treasure of Dim Wood, an eternal flame held within an ancient amulet. You need never fear the dark now, or what things it may hold.`
   hideEnemy()
   enemyBox.src = ''
   hideEnemy2()
@@ -469,12 +469,12 @@ function runToChurch(){
   hideButtons()
   runIterateFrameHero()
   // change enemyBox to chest?? ^^^
-  setTimeout(youWin, 10000)
-  setTimeout(churchMusicStop, 9999)
+  setTimeout(youWin, 12000)
+  setTimeout(churchMusicStop, 11999)
 }
 
 function branch1Skull(){
-  dialog.innerText = `As you walk down the path, deciding to investigate what the light is, you see it turns out to be a giant flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the giant skull, hoping you might catch it by surprise.`
+  dialog.innerText = `As you walk down the path deciding to investigate what the light is, you see it turns out to be a giant flaming skull hovering in a clearing of the woods laughing to itself. Choice 1: Try to ignore the skull, and sneak away hoping it hasn’t seen you. Choice 2: Attack the giant skull, hoping you might catch it by surprise.`
   enemyBox.src = '../images/fire-skull.gif'
   revealEnemy()
   removeChoices()
@@ -494,7 +494,7 @@ function branch1IgnoreSkull(){
 }
 
 function branch1AttackSkull(){
-  dialog.innerText = `You manage to get behind the skull quietly unseen and unheard. You raise your sword and cleave the skull in half with an unbelievably mighty swing. Truly a heroic feat! You see something shining inside one of the halves of the split skull. You found a silver key!`
+  dialog.innerText = `You manage to get behind the skull quietly, unseen and unheard. You raise your sword and cleave the skull in half with an unbelievably mighty swing. Truly a heroic feat! You see something shining inside one of the halves of the split skull. You found a silver key!`
   hideButtons()
   removeChoices()
   runIterateFrameHero()
@@ -510,7 +510,7 @@ function skullDeadMoveOn (){
   revealButtons()
   backgroundMusicStop()
   graveMusicPlay()
-  dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of a church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
+  dialog.innerText = `As you press forward, leaving the now ashen skull behind you, you see a path leading to a graveyard with a church looming over the grounds. The church has an iron gate, and further in the distance you see a cloaked figure shrouded in mist at the edge of the graveyard. Choice 1: Try to open the iron gate to the entrance of the church. Choice 2: On your left you see a cloaked figure on the edge of the graveyard shrouded in mist.`
   backGround.src = "../images/backgrounds/graveyard-background.png"
   runIterateFrameHero()
   hideEnemy()

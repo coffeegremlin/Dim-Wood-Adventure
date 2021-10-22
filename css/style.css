@@ -76,8 +76,6 @@ img#enemy{
   z-index: 30;
   width: 35%;
   height: 40%;
-  /* bottom: 45%;
-  right: 38%; */
 }
 
 img#enemy2-or-item{
@@ -87,8 +85,6 @@ img#enemy2-or-item{
   z-index: 30;
   width: 35%;
   height: 35%;
-  /* bottom: 50%;
-  right: 40%; */
 }
 
 button#start{
@@ -141,13 +137,3 @@ img#inventory{
   height: 50px;
   width: 200px;
 }
-
-/* add an @media only for mobile view */
-
-/* #display{
-  width: 720px;
-  max-width: 80%;
-  padding: 20px;
-  border-radius: 2px;
-  box-shadow: 0 0 5px 2px;
-} */
