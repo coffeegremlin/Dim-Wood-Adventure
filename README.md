@@ -6,10 +6,6 @@ This game is played by choosing choice 1 or 2 as the story continues. If the pla
 
 Launch the game: https://dimwoodadventure.netlify.app/
 
-### Screen Shots:
-<img src="images/screenshot1.png">
-
-<img src="images/screenshot2.png">
 
 ### Assets used:
 * Royalty free music provided from whitebataudio: https://whitebataudio.itch.io/retro-horrorsci-fi-music-pack
