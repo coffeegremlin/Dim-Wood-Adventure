@@ -3,7 +3,6 @@ html{
 }
 
 body{
-  
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 19px;
   font-weight: bold;
@@ -18,13 +17,12 @@ body{
 
 section#game-board{
   box-sizing: content-box;
-  width: 100%;
   display: grid;
   justify-content: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  margin: 10px;
-  min-height: 80vh;
-  min-width: 80vh;
+  margin: auto;
+  min-height: 90vh;
+  min-width: 50vw;
   align-items: center;
   text-align: center;
   border: #773C6A 10px solid;
@@ -53,7 +51,7 @@ section#game-board{
   left: 10%;
   right: 10%;
   top: 15%;
-  bottom: 20%;
+  bottom: 30%;
   position: absolute;
   align-items: center;
   height: 60%;
@@ -95,16 +93,23 @@ button#start{
   color: #FFFADE;
 }
 
+#buttons {
+  max-height: 400px;
+}
+
 h4#dialog-box{
   color: #C7C3A8;
   padding: 10px;
   border: #7A3522 4px solid;
   border-radius: 1%;
-  z-index: 30;
+  z-index: 20;
   position: absolute;
-  bottom: 10%;
+  justify-content: center;
+  height: 12%;
+  bottom: 8%;
   left: 10%;
   right: 10%;
+  font-size: 0.8vw;
 }
 
 img#inventory{
